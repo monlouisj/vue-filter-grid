@@ -26,7 +26,7 @@ gulp.task('install', function() {
 
 gulp.task('js', function() {
   var bfy = browserify(_appjs)
-  //.transform(vueify)
+  .transform(vueify)
   .bundle();
 
   return bfy

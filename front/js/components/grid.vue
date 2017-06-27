@@ -20,12 +20,11 @@ export default {
   computed:{
     isLoading(){
       return this.$store.state.isLoading;
-
     },
     tracks (){
       return this.$store.state.tracks;
     }
-  }
+  },
   methods:{}
 }
 </script>
