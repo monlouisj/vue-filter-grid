@@ -1,0 +1,13 @@
+var public_conf = require('./public_config'),
+fs = require('fs');
+
+module.exports = {
+  port:3000,
+  myId:"",
+  redirectUri:"",
+  clientId:"",
+  clientSecret:"",
+  authorizationCode:"",
+  playlists: public_conf.playlists,
+  json_dir: fs.realpathSync('./public/json/')
+}

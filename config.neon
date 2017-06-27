@@ -1,0 +1,11 @@
+fonts:
+    - #Here starts font declaration
+        family:	Quicksand
+        variants:
+            - 300
+            - 400
+            - 500
+            - 700
+        subsets:
+            - latin
+            - latin-ext

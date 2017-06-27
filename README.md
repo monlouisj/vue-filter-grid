@@ -1,1 +1,2 @@
-# vue-filter-grid
+fetch playlist
+associate song with text/emoji
