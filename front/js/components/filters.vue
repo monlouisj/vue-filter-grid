@@ -1,7 +1,7 @@
 <template>
 <div class="">
   <label>Playlist</label>
-  <select class="" v-model="state.playlist_idx">
+  <select class="" v-model="playlist_idx">
     <option v-for="id in playlists_ids" :value="id">{{id}}</option>
   </select>
 
@@ -16,10 +16,22 @@
 </template>
 
 <script>
+import store from '../store.js';
 export default {
   name: 'Filters',
+  store,
   computed: {
-    playlists_ids: function(){this.$store.state.playlists.map((v,i)=>i)},
+    playlist_idx:{
+      get(){
+        return this.$store.state.playlist_idx;
+      },
+      set(v){
+        this.$store.commit('updateFilter',{field:'playlist_idx', val: v})
+      }
+    },
+    playlists_ids(){
+      return Object.keys(this.$store.state.playlists);
+    },
     byArtist: {
       get:function(){
         return this.$store.state.byArtist;
@@ -43,11 +55,11 @@ export default {
       set:function(v){
         this.$store.commit('updateFilter',{field:'byAlbum', val: v});
       }
-    },
+    }
   },
   methods:{
     reFetch:function(){
-      this.$store.fetchData();
+      this.$store.dispatch('fetchData');
     }
   }
 }

@@ -37,7 +37,7 @@ gulp.task('js', function() {
 
 gulp.task('js:watch', function () {
   livereload.listen();
-  gulp.watch(_appjs, ['js']);
+  gulp.watch('./front/js/**/*', ['js']);
 });
 
 gulp.task('sass', function() {

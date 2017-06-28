@@ -18,22 +18,15 @@ module.exports = new Vuex.Store({
     byName: '',
     byAlbum: '',
     per_page: 20,
-    pages_count: 0,
     page_idx: 0
   },
   actions:{
-    getTracks(context){
-      if(typeof context.playlists[context.playlist_idx] === "undefined") return false;
-      var all_tracks = context.playlists[context.playlist_idx];
-      var trax = all_tracks.slice(context.page_idx, context.pages_count);
-      context.commit('setTracks', {tracks: trax});
-    },
     fetchData: function(context){
-      var url = "".concat('json/playlist-',context.playlist_idx,'.json');
+      var url = "".concat('json/playlist-',context.state.playlist_idx,'.json');
 
       //fetch json data
       axios.get(url)
-      .then(response => {
+      .then((response) => {
         if(typeof response.data !== "object") throw new Error('data undefined');
         context.commit('setResults', {tracks: response.data});
       })

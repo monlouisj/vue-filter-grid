@@ -10,12 +10,12 @@ var ready = (fn) => document.readyState != 'loading' ? fn() : document.addEventL
 
 ready(function(){
 
-var app = new Vue({
+  var app = new Vue({
     el: '#app',
     store,
     components: {Filters, Grid, Pagination},
     created: function(){
-      store.fetchData();
+      this.$store.dispatch('fetchData');
     }
   });
 });

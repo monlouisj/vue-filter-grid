@@ -21,8 +21,10 @@ export default {
     isLoading(){
       return this.$store.state.isLoading;
     },
-    tracks (){
-      return this.$store.state.tracks;
+    tracks(){
+      if(typeof this.$store.state.playlists[this.$store.state.playlist_idx] === "undefined") return false;
+      var all_tracks = this.$store.state.playlists[this.$store.state.playlist_idx];
+      return all_tracks.slice(this.$store.state.page_idx, this.$store.state.per_page);
     }
   },
   methods:{}

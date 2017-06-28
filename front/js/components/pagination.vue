@@ -2,7 +2,7 @@
   <div class="">
     <ul>
       <li @click="goTo1st"> << </li>
-      <li v-for='n in pages_count' @click="goTo(n)" :class="{active: n==page_idx}">{{n+1}}</li>
+      <li v-for='n in pages_nums' @click="goTo(n)" :class="{active: n==page_idx}">{{n+1}}</li>
       <li @click="goToLast"> >> </li>
     </ul>
   </div>
@@ -12,9 +12,25 @@
 export default {
   name: "Pagination",
   computed:{
-    per_page: () => this.$store.state.per_page,
-    pages_count: () => this.$store.state.pages_count,
-    page_idx: () => this.$store.state.page_idx
+    per_page(){
+      return this.$store.state.per_page
+    },
+    pages_nums(){
+      var arr = [];
+      for (var i = this.$store.state.page_idx; i < this.pages_count; i++) {
+        arr.push(i);
+        if(arr.length == 5) break;
+      }
+      return arr;
+    },
+    pages_count(){
+      if(typeof this.$store.state.playlists[this.$store.state.playlist_idx] === "undefined") return false;
+      var len = this.$store.state.playlists[this.$store.state.playlist_idx].length;
+      return Math.ceil(len/this.per_page);
+    },
+    page_idx(){
+      return this.$store.state.page_idx;
+    }
   },
   methods: {
     goTo(n){
