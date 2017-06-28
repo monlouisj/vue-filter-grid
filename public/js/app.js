@@ -1,25 +1,25 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var config = require('../../public_config'),
-Vue = require('vue/dist/vue.js'),
-store = require('./store.js'),
-Filters = require('./components/filters.vue'),
-Grid = require('./components/grid.vue'),
-Pagination = require('./components/pagination.vue'),
-imagesLoaded = require('imagesloaded');
-
-var ready = (fn) => document.readyState != 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
-
-ready(function(){
-
-  var app = new Vue({
-    el: '#app',
-    store,
-    components: {Filters, Grid, Pagination},
-    created: function(){
-      this.$store.dispatch('fetchData');
-    }
-  });
-});
+var config = require('../../public_config'),
+Vue = require('vue/dist/vue.js'),
+store = require('./store.js'),
+Filters = require('./components/filters.vue'),
+Grid = require('./components/grid.vue'),
+Pagination = require('./components/pagination.vue'),
+imagesLoaded = require('imagesloaded');
+
+var ready = (fn) => document.readyState != 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
+
+ready(function(){
+
+  var app = new Vue({
+    el: '#app',
+    store,
+    components: {Filters, Grid, Pagination},
+    created: function(){
+      this.$store.dispatch('fetchData');
+    }
+  });
+});
 
 },{"../../public_config":74,"./components/filters.vue":2,"./components/grid.vue":3,"./components/pagination.vue":4,"./store.js":5,"imagesloaded":67,"vue/dist/vue.js":71}],2:[function(require,module,exports){
 ;(function(){
@@ -198,54 +198,54 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":72,"vue-hot-reload-api":70}],5:[function(require,module,exports){
-var Vue = require('vue/dist/vue.js'),
-Vuex = require('vuex'),
-config = require('../../public_config'),
-axios = require('axios');
-
-Vue.use(Vuex);
-
-var _pLists = {};
-config.playlists.forEach(id => _pLists[id] = []);
-
-module.exports = new Vuex.Store({
-  state:{
-    isLoading: false,
-    playlists: _pLists,
-    playlist_idx : config.playlists[0],
-    tracks: [],
-    byArtist: '',
-    byName: '',
-    byAlbum: '',
-    per_page: 20,
-    page_idx: 0
-  },
-  actions:{
-    fetchData: function(context){
-      var url = "".concat('json/playlist-',context.state.playlist_idx,'.json');
-
-      //fetch json data
-      axios.get(url)
-      .then((response) => {
-        if(typeof response.data !== "object") throw new Error('data undefined');
-        context.commit('setResults', {tracks: response.data});
-      })
-      .catch(function (error) {
-        throw new Error('xhr error');
-      });
-    }
-  },
-  mutations:{
-    showLoadMask: (state) => state.isLoading = true,
-    hideLoadMask: (state) => state.isLoading = false,
-    setResults: (state, arg) => {
-      var playlist_id = state.playlist_idx;
-      state.playlists[playlist_id] = arg.tracks;
-    },
-    updateFilter:(state, arg) => state[arg.field] = arg.val,
-    setTracks: (state,arg) => state.tracks = arg.tracks
-  }
-});
+var Vue = require('vue/dist/vue.js'),
+Vuex = require('vuex'),
+config = require('../../public_config'),
+axios = require('axios');
+
+Vue.use(Vuex);
+
+var _pLists = {};
+config.playlists.forEach(id => _pLists[id] = []);
+
+module.exports = new Vuex.Store({
+  state:{
+    isLoading: false,
+    playlists: _pLists,
+    playlist_idx : config.playlists[0],
+    tracks: [],
+    byArtist: '',
+    byName: '',
+    byAlbum: '',
+    per_page: 20,
+    page_idx: 0
+  },
+  actions:{
+    fetchData: function(context){
+      var url = "".concat('json/playlist-',context.state.playlist_idx,'.json');
+
+      //fetch json data
+      axios.get(url)
+      .then((response) => {
+        if(typeof response.data !== "object") throw new Error('data undefined');
+        context.commit('setResults', {tracks: response.data});
+      })
+      .catch(function (error) {
+        throw new Error('xhr error');
+      });
+    }
+  },
+  mutations:{
+    showLoadMask: (state) => state.isLoading = true,
+    hideLoadMask: (state) => state.isLoading = false,
+    setResults: (state, arg) => {
+      var playlist_id = state.playlist_idx;
+      state.playlists[playlist_id] = arg.tracks;
+    },
+    updateFilter:(state, arg) => state[arg.field] = arg.val,
+    setTracks: (state,arg) => state.tracks = arg.tracks
+  }
+});
 
 },{"../../public_config":74,"axios":6,"vue/dist/vue.js":71,"vuex":73}],6:[function(require,module,exports){
 module.exports = require('./lib/axios');
@@ -20473,9 +20473,9 @@ return index;
 })));
 
 },{}],74:[function(require,module,exports){
-module.exports = {
-  playlists : ['4bzkFX8ZvDxiXXWPqicuI0','1bQY0mIdsALHh6Uc9KcA1a'],
-  root_url: 'http://localapp.com:3000/'
-}
+module.exports = {
+  playlists : ['4bzkFX8ZvDxiXXWPqicuI0','1bQY0mIdsALHh6Uc9KcA1a'],
+  root_url: 'http://localapp.com:3000/'
+}
 
 },{}]},{},[1]);
