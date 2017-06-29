@@ -1,11 +1,11 @@
 <template>
-  <div class="">
-    <ul>
-      <li @click="goTo1st"> << </li>
-      <li v-for='n in pages_nums' @click="goTo(n)" :class="{active: n==page_idx}">{{n+1}}</li>
-      <li @click="goToLast"> >> </li>
+  <nav aria-label="Grid navigation">
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a class="page-link" href="#" @click="goTo1st">First</a></li>
+      <li v-for="n in pages_nums" class="page-item" :class="{active: n==page_idx}"><a class="page-link" href="#" @click="goTo(n)">{{n+1}}</a></li>
+      <li class="page-item"><a class="page-link" href="#" @click="goToLast">Last</a></li>
     </ul>
-  </div>
+  </nav>
 </template>
 
 <script>

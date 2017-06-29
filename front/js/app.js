@@ -9,6 +9,10 @@ imagesLoaded = require('imagesloaded');
 var ready = (fn) => document.readyState != 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
 
 ready(function(){
+  Vue.filter('wrap', function(v){
+      if(v.length > 80) v = v.substr(0,80).concat('...');
+      return v;
+  });
 
   var app = new Vue({
     el: '#app',

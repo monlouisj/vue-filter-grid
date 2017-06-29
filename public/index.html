@@ -8,20 +8,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Place favicon.ico in the root directory -->
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="lib/material.min.css"/>
 
-        <!--<script src="js/libz.js"></script>-->
+        <script src="lib/jquery.min.js"></script>
+        <script src="lib/material.min.js"></script>
         <script src="js/app.js"></script>
     </head>
     <body>
-        <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
+      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">@nkg</a>
 
-        <div id="app">
-          <filters></filters>
-          <grid></grid>
-          <pagination></pagination>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              Vue.js + Vuex + Bootstrap4 Material
+            </li>
+          </ul>
+        </div>
+        </nav>
+        <div class="container-fluid" id="app">
+          <div class="row">
+            <div class="col-xs-12 col-sm-3">
+              <filters></filters>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+              <grid></grid>
+            </div>
+          </div>
+          <div class="row">
+            <pagination></pagination>
+          </div>
         </div>
     </body>
 </html>

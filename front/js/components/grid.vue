@@ -2,13 +2,15 @@
 <div class="loadmask" v-if="isLoading">
   <p>...</p>
 </div>
-<div class="" v-else>
-  <div class="" v-for="trk in tracks">
-    <div class="track">
-      <img :src="trk.img.url" :alt="trk.name">
-      <p class="name">{{trk.name}}</p>
-      <p class="artist">{{trk.artist}}</p>
-      <p class="album">{{trk.album}}</p>
+<div class="row" v-else>
+  <div class="col-xs-12 col-sm-3" v-for="(trk,y) in tracks">
+    <div class="card card-inverse">
+      <img class="card-img img-fluid" :src="trk.img.url" :alt="trk.name">
+      <div class="card-img-overlay">
+        <h4 class="card-title">{{trk.name|wrap}}</h4>
+        <p class="card-text">{{trk.artist|wrap}}</p>
+        <p class="card-text"><small class="text-muted">{{trk.album|wrap}}</small></p>
+      </div>
     </div>
   </div>
 </div>

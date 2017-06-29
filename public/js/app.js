@@ -10,6 +10,10 @@ imagesLoaded = require('imagesloaded');
 var ready = (fn) => document.readyState != 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
 
 ready(function(){
+  Vue.filter('wrap', function(v){
+      if(v.length > 80) v = v.substr(0,80).concat('...');
+      return v;
+  });
 
   var app = new Vue({
     el: '#app',
@@ -51,6 +55,14 @@ exports.default = {
         this.$store.commit('updateFilter', { field: 'playlist_idx', val: v });
       }
     },
+    per_page: {
+      get: function get() {
+        return this.$store.state.per_page;
+      },
+      set: function set(v) {
+        this.$store.commit('updateFilter', { field: 'per_page', val: v });
+      }
+    },
     playlists_ids: function playlists_ids() {
       return (0, _keys2.default)(this.$store.state.playlists);
     },
@@ -90,7 +102,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{},[_c('label',[_vm._v("Playlist")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.playlist_idx),expression:"playlist_idx"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.playlist_idx=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.playlists_ids),function(id){return _c('option',{domProps:{"value":id}},[_vm._v(_vm._s(id))])})),_vm._v(" "),_c('label',[_vm._v("Artist")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byArtist),expression:"byArtist"}],attrs:{"type":"text"},domProps:{"value":(_vm.byArtist)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byArtist=$event.target.value}}}),_vm._v(" "),_c('label',[_vm._v("Name")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byName),expression:"byName"}],attrs:{"type":"text"},domProps:{"value":(_vm.byName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byName=$event.target.value}}}),_vm._v(" "),_c('label',[_vm._v("Album")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byAlbum),expression:"byAlbum"}],attrs:{"type":"text"},domProps:{"value":(_vm.byAlbum)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byAlbum=$event.target.value}}}),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.reFetch}},[_vm._v("Refresh")])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Playlist")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.playlist_idx),expression:"playlist_idx"}],staticClass:"form-control",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.playlist_idx=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.playlists_ids),function(id){return _c('option',{domProps:{"value":id}},[_vm._v(_vm._s(id))])}))]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by artist")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byArtist),expression:"byArtist"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"artist"},domProps:{"value":(_vm.byArtist)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byArtist=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by name")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byName),expression:"byName"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"name"},domProps:{"value":(_vm.byName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byName=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by album")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byAlbum),expression:"byAlbum"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"album"},domProps:{"value":(_vm.byAlbum)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byAlbum=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Items per page")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.per_page),expression:"per_page"}],staticClass:"form-control",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.per_page=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},[_c('option',{attrs:{"value":"10"}},[_vm._v("10")]),_vm._v(" "),_c('option',{attrs:{"value":"20"}},[_vm._v("20")]),_vm._v(" "),_c('option',{attrs:{"value":"50"}},[_vm._v("50")])])]),_vm._v(" "),_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.reFetch}},[_vm._v("Refresh")])])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -127,7 +139,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isLoading)?_c('div',{staticClass:"loadmask"},[_c('p',[_vm._v("...")])]):_c('div',{},_vm._l((_vm.tracks),function(trk){return _c('div',{},[_c('div',{staticClass:"track"},[_c('img',{attrs:{"src":trk.img.url,"alt":trk.name}}),_vm._v(" "),_c('p',{staticClass:"name"},[_vm._v(_vm._s(trk.name))]),_vm._v(" "),_c('p',{staticClass:"artist"},[_vm._v(_vm._s(trk.artist))]),_vm._v(" "),_c('p',{staticClass:"album"},[_vm._v(_vm._s(trk.album))])])])}))}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isLoading)?_c('div',{staticClass:"loadmask"},[_c('p',[_vm._v("...")])]):_c('div',{staticClass:"row"},_vm._l((_vm.tracks),function(trk,y){return _c('div',{staticClass:"col-xs-12 col-sm-3"},[_c('div',{staticClass:"card card-inverse"},[_c('img',{staticClass:"card-img img-fluid",attrs:{"src":trk.img.url,"alt":trk.name}}),_vm._v(" "),_c('div',{staticClass:"card-img-overlay"},[_c('h4',{staticClass:"card-title"},[_vm._v(_vm._s(_vm._f("wrap")(trk.name)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_vm._v(_vm._s(_vm._f("wrap")(trk.artist)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_c('small',{staticClass:"text-muted"},[_vm._v(_vm._s(_vm._f("wrap")(trk.album)))])])])])])}))}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -185,7 +197,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{},[_c('ul',[_c('li',{on:{"click":_vm.goTo1st}},[_vm._v(" << ")]),_vm._v(" "),_vm._l((_vm.pages_nums),function(n){return _c('li',{class:{active: n==_vm.page_idx},on:{"click":function($event){_vm.goTo(n)}}},[_vm._v(_vm._s(n+1))])}),_vm._v(" "),_c('li',{on:{"click":_vm.goToLast}},[_vm._v(" >> ")])],2)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{attrs:{"aria-label":"Grid navigation"}},[_c('ul',{staticClass:"pagination justify-content-center"},[_c('li',{staticClass:"page-item"},[_c('a',{staticClass:"page-link",attrs:{"href":"#"},on:{"click":_vm.goTo1st}},[_vm._v("First")])]),_vm._v(" "),_vm._l((_vm.pages_nums),function(n){return _c('li',{staticClass:"page-item",class:{active: n==_vm.page_idx}},[_c('a',{staticClass:"page-link",attrs:{"href":"#"},on:{"click":function($event){_vm.goTo(n)}}},[_vm._v(_vm._s(n+1))])])}),_vm._v(" "),_c('li',{staticClass:"page-item"},[_c('a',{staticClass:"page-link",attrs:{"href":"#"},on:{"click":_vm.goToLast}},[_vm._v("Last")])])],2)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
