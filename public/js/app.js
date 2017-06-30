@@ -20,12 +20,13 @@ ready(function(){
     store,
     components: {Filters, Grid, Pagination},
     created: function(){
+      this.$store.dispatch('filterUpdate');
       this.$store.dispatch('fetchData');
     }
   });
 });
 
-},{"../../public_config":74,"./components/filters.vue":2,"./components/grid.vue":3,"./components/pagination.vue":4,"./store.js":5,"imagesloaded":67,"vue/dist/vue.js":71}],2:[function(require,module,exports){
+},{"../../public_config":78,"./components/filters.vue":2,"./components/grid.vue":3,"./components/pagination.vue":4,"./store.js":5,"imagesloaded":67,"vue/dist/vue.js":75}],2:[function(require,module,exports){
 ;(function(){
 'use strict';
 
@@ -93,6 +94,9 @@ exports.default = {
     }
   },
   methods: {
+    submit: function submit() {
+      this.$store.dispatch('filterUpdate');
+    },
     reFetch: function reFetch() {
       this.$store.dispatch('fetchData');
     }
@@ -102,7 +106,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Playlist")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.playlist_idx),expression:"playlist_idx"}],staticClass:"form-control",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.playlist_idx=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.playlists_ids),function(id){return _c('option',{domProps:{"value":id}},[_vm._v(_vm._s(id))])}))]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by artist")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byArtist),expression:"byArtist"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"artist"},domProps:{"value":(_vm.byArtist)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byArtist=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by name")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byName),expression:"byName"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"name"},domProps:{"value":(_vm.byName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byName=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by album")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byAlbum),expression:"byAlbum"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"album"},domProps:{"value":(_vm.byAlbum)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byAlbum=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Items per page")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.per_page),expression:"per_page"}],staticClass:"form-control",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.per_page=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},[_c('option',{attrs:{"value":"10"}},[_vm._v("10")]),_vm._v(" "),_c('option',{attrs:{"value":"20"}},[_vm._v("20")]),_vm._v(" "),_c('option',{attrs:{"value":"50"}},[_vm._v("50")])])]),_vm._v(" "),_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.reFetch}},[_vm._v("Refresh")])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Playlist")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.playlist_idx),expression:"playlist_idx"}],staticClass:"form-control",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.playlist_idx=$event.target.multiple ? $$selectedVal : $$selectedVal[0]},_vm.reFetch]}},_vm._l((_vm.playlists_ids),function(id){return _c('option',{domProps:{"value":id}},[_vm._v(_vm._s(id))])}))]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by artist")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byArtist),expression:"byArtist"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"artist"},domProps:{"value":(_vm.byArtist)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byArtist=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by name")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byName),expression:"byName"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"name"},domProps:{"value":(_vm.byName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byName=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by album")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byAlbum),expression:"byAlbum"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"album"},domProps:{"value":(_vm.byAlbum)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byAlbum=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Items per page")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.per_page),expression:"per_page"}],staticClass:"form-control",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.per_page=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},[_c('option',{attrs:{"value":"10"}},[_vm._v("10")]),_vm._v(" "),_c('option',{attrs:{"value":"20"}},[_vm._v("20")]),_vm._v(" "),_c('option',{attrs:{"value":"50"}},[_vm._v("50")])])]),_vm._v(" "),_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.submit}},[_vm._v("Refresh")])])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -114,9 +118,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-63a99142", __vue__options__)
   }
 })()}
-},{"../store.js":5,"babel-runtime/core-js/object/keys":31,"vue":72,"vue-hot-reload-api":70}],3:[function(require,module,exports){
+},{"../store.js":5,"babel-runtime/core-js/object/keys":31,"vue":76,"vue-hot-reload-api":74}],3:[function(require,module,exports){
 ;(function(){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -128,9 +132,7 @@ exports.default = {
       return this.$store.state.isLoading;
     },
     tracks: function tracks() {
-      if (typeof this.$store.state.playlists[this.$store.state.playlist_idx] === "undefined") return false;
-      var all_tracks = this.$store.state.playlists[this.$store.state.playlist_idx];
-      return all_tracks.slice(this.$store.state.page_idx, this.$store.state.per_page);
+      return this.$store.state.tracks;
     }
   },
   methods: {}
@@ -139,7 +141,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isLoading)?_c('div',{staticClass:"loadmask"},[_c('p',[_vm._v("...")])]):_c('div',{staticClass:"row"},_vm._l((_vm.tracks),function(trk,y){return _c('div',{staticClass:"col-xs-12 col-sm-3"},[_c('div',{staticClass:"card card-inverse"},[_c('img',{staticClass:"card-img img-fluid",attrs:{"src":trk.img.url,"alt":trk.name}}),_vm._v(" "),_c('div',{staticClass:"card-img-overlay"},[_c('h4',{staticClass:"card-title"},[_vm._v(_vm._s(_vm._f("wrap")(trk.name)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_vm._v(_vm._s(_vm._f("wrap")(trk.artist)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_c('small',{staticClass:"text-muted"},[_vm._v(_vm._s(_vm._f("wrap")(trk.album)))])])])])])}))}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isLoading)?_c('div',{staticClass:"loadmask"},[_c('p',[_vm._v("...")])]):_c('div',{staticClass:"row"},_vm._l((_vm.tracks),function(trk,y){return _c('div',{staticClass:"col-xs-12 col-sm-2"},[_c('div',{staticClass:"card card-inverse"},[_c('img',{staticClass:"card-img img-fluid",attrs:{"src":trk.img.url,"alt":trk.name}}),_vm._v(" "),_c('div',{staticClass:"card-img-overlay"},[_c('h4',{staticClass:"card-title"},[_vm._v(_vm._s(_vm._f("wrap")(trk.name)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_vm._v(_vm._s(_vm._f("wrap")(trk.artist)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_c('small',{staticClass:"text-muted"},[_vm._v(_vm._s(_vm._f("wrap")(trk.album)))])])])])])}))}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -151,9 +153,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-f9974fdc", __vue__options__)
   }
 })()}
-},{"vue":72,"vue-hot-reload-api":70}],4:[function(require,module,exports){
+},{"vue":76,"vue-hot-reload-api":74}],4:[function(require,module,exports){
 ;(function(){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -173,8 +175,7 @@ exports.default = {
       return arr;
     },
     pages_count: function pages_count() {
-      if (typeof this.$store.state.playlists[this.$store.state.playlist_idx] === "undefined") return false;
-      var len = this.$store.state.playlists[this.$store.state.playlist_idx].length;
+      var len = this.$store.state.filtered.length;
       return Math.ceil(len / this.per_page);
     },
     page_idx: function page_idx() {
@@ -184,12 +185,15 @@ exports.default = {
   methods: {
     goTo: function goTo(n) {
       this.$store.commit('updateFilter', { field: 'page_idx', val: n });
+      this.$store.dispatch('filterUpdate');
     },
     goTo1st: function goTo1st() {
       this.$store.commit('updateFilter', { field: 'page_idx', val: 0 });
+      this.$store.dispatch('filterUpdate');
     },
     goToLast: function goToLast() {
-      this.$store.commit('updateFilter', { field: 'page_idx', val: this.pages_count - 1 });
+      this.$store.commit('updateFilter', { field: 'page_idx', val: this.pages_count - 2 });
+      this.$store.dispatch('filterUpdate');
     }
   }
 };
@@ -206,14 +210,15 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-33f50366", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-33f50366", __vue__options__)
+    hotAPI.reload("data-v-33f50366", __vue__options__)
   }
 })()}
-},{"vue":72,"vue-hot-reload-api":70}],5:[function(require,module,exports){
+},{"vue":76,"vue-hot-reload-api":74}],5:[function(require,module,exports){
 var Vue = require('vue/dist/vue.js'),
 Vuex = require('vuex'),
 config = require('../../public_config'),
-axios = require('axios');
+axios = require('axios'),
+linq = require('linq-es2015');
 
 Vue.use(Vuex);
 
@@ -225,6 +230,7 @@ module.exports = new Vuex.Store({
     isLoading: false,
     playlists: _pLists,
     playlist_idx : config.playlists[0],
+    filtered: [],
     tracks: [],
     byArtist: '',
     byName: '',
@@ -245,21 +251,48 @@ module.exports = new Vuex.Store({
       .catch(function (error) {
         throw new Error('xhr error');
       });
+    },
+    filterUpdate(context){
+      if(typeof context.state.playlists[context.state.playlist_idx] === "undefined") return false;
+      var all_tracks = context.state.playlists[context.state.playlist_idx];
+
+      var query = linq.asEnumerable( all_tracks );
+      var byArtist = context.state.byArtist;
+      if(byArtist.length){
+        query = query.where((t)=> t.artist.match(new RegExp(byArtist,'i')));
+      }
+
+      var byName = context.state.byName;
+      if(byName.length){
+        query = query.where((t)=> t.name.match(new RegExp(byName,'i')));
+      }
+
+      var byAlbum = context.state.byAlbum;
+      if(byAlbum.length){
+        query = query.where((t)=> t.album.match(new RegExp(byAlbum,'i')));
+      }
+
+      context.commit('setFiltered', {filtered: query.ToArray()});
+
+      query = query.skip(context.state.page_idx*context.state.per_page).take(context.state.per_page);
+      context.commit('setTracks', {tracks: query.ToArray()});
+
     }
   },
   mutations:{
     showLoadMask: (state) => state.isLoading = true,
     hideLoadMask: (state) => state.isLoading = false,
+    setFiltered: (state, arg) => state.filtered = arg.filtered,
+    setTracks: (state, arg) => state.tracks = arg.tracks,
     setResults: (state, arg) => {
       var playlist_id = state.playlist_idx;
       state.playlists[playlist_id] = arg.tracks;
     },
-    updateFilter:(state, arg) => state[arg.field] = arg.val,
-    setTracks: (state,arg) => state.tracks = arg.tracks
+    updateFilter:(state, arg) => state[arg.field] = arg.val
   }
 });
 
-},{"../../public_config":74,"axios":6,"vue/dist/vue.js":71,"vuex":73}],6:[function(require,module,exports){
+},{"../../public_config":78,"axios":6,"linq-es2015":71,"vue/dist/vue.js":75,"vuex":77}],6:[function(require,module,exports){
 module.exports = require('./lib/axios');
 },{"./lib/axios":8}],7:[function(require,module,exports){
 (function (process){
@@ -445,7 +478,7 @@ module.exports = function xhrAdapter(config) {
 };
 
 }).call(this,require('_process'))
-},{"../core/createError":14,"./../core/settle":17,"./../helpers/btoa":21,"./../helpers/buildURL":22,"./../helpers/cookies":24,"./../helpers/isURLSameOrigin":26,"./../helpers/parseHeaders":28,"./../utils":30,"_process":69}],8:[function(require,module,exports){
+},{"../core/createError":14,"./../core/settle":17,"./../helpers/btoa":21,"./../helpers/buildURL":22,"./../helpers/cookies":24,"./../helpers/isURLSameOrigin":26,"./../helpers/parseHeaders":28,"./../utils":30,"_process":73}],8:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -998,7 +1031,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this,require('_process'))
-},{"./adapters/http":7,"./adapters/xhr":7,"./helpers/normalizeHeaderName":27,"./utils":30,"_process":69}],20:[function(require,module,exports){
+},{"./adapters/http":7,"./adapters/xhr":7,"./helpers/normalizeHeaderName":27,"./utils":30,"_process":73}],20:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -2511,6 +2544,978 @@ function isSlowBuffer (obj) {
 }
 
 },{}],69:[function(require,module,exports){
+"use strict";
+///////////////////////////////////////////////////////////////////////////////
+//
+// Licensed under the Apache License, Version 2.0  ( the  "License" );  you may 
+// not use this file except in compliance with the License.  You may  obtain  a 
+// copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required  by  applicable  law  or  agreed  to  in  writing,  software 
+// distributed under the License is distributed on an "AS  IS"  BASIS,  WITHOUT
+// WARRANTIES OR CONDITIONS  OF  ANY  KIND, either express or implied.  See the 
+// License for the specific  language  governing  permissions  and  limitations 
+// under the License.
+Object.defineProperty(exports, "__esModule", { value: true });
+function* Forward(target) {
+    yield* target;
+}
+exports.Forward = Forward;
+function* Reverse(target) {
+    for (let i = target.length - 1; i >= 0; i--) {
+        yield target[i];
+    }
+}
+exports.Reverse = Reverse;
+function* Select(target, transform) {
+    let index = 0;
+    for (let value of target) {
+        yield transform(value, index++);
+    }
+}
+exports.Select = Select;
+function* DefaultIfEmpty(target, defaultValue) {
+    let iterator = target[Symbol.iterator]();
+    let result = iterator.next();
+    if (result.done) {
+        yield defaultValue;
+    }
+    else {
+        yield* target;
+    }
+}
+exports.DefaultIfEmpty = DefaultIfEmpty;
+function* ChunkBy(target, keySelect, elementSelector, resultSelector) {
+    let key, box, i = 0;
+    for (let value of target) {
+        let newKey = keySelect(value, i++);
+        if (key !== newKey && box) {
+            yield resultSelector(key, box);
+            box = undefined;
+        }
+        if (!box) {
+            box = new Array();
+        }
+        key = newKey;
+        box.push(elementSelector(value));
+    }
+    if (box) {
+        yield resultSelector(key, box);
+    }
+}
+exports.ChunkBy = ChunkBy;
+function* Distinct(target, keySelector) {
+    let set = new Set();
+    for (let value of target) {
+        let key = keySelector(value);
+        if (set.has(key))
+            continue;
+        set.add(key);
+        yield value;
+    }
+}
+exports.Distinct = Distinct;
+function* DistinctFast(target) {
+    let set = new Set();
+    for (let value of target) {
+        if (set.has(value))
+            continue;
+        set.add(value);
+        yield value;
+    }
+}
+exports.DistinctFast = DistinctFast;
+function* OfType(target, obj, typeName) {
+    if (typeName) {
+        for (let value of target) {
+            if (typeName == typeof (value)) {
+                yield value;
+            }
+            else if (value instanceof obj) {
+                yield value;
+            }
+        }
+    }
+    else {
+        for (let value of target) {
+            if (value instanceof obj) {
+                yield value;
+            }
+        }
+    }
+}
+exports.OfType = OfType;
+function* Where(target, predicate) {
+    let index = 0;
+    for (let value of target) {
+        if (!predicate(value, index++))
+            continue;
+        yield value;
+    }
+}
+exports.Where = Where;
+function* Skip(target, skip) {
+    let index = 0;
+    for (let value of target) {
+        if (skip > index++)
+            continue;
+        yield value;
+    }
+}
+exports.Skip = Skip;
+function* SkipWhile(target, predicate) {
+    let index = 0, skipped = false;
+    for (let value of target) {
+        if (!skipped && !(skipped = !predicate(value, index++)))
+            continue;
+        yield value;
+    }
+}
+exports.SkipWhile = SkipWhile;
+function* TakeWhile(target, predicate) {
+    let index = 0;
+    for (let value of target) {
+        if (!predicate(value, index++))
+            break;
+        yield value;
+    }
+}
+exports.TakeWhile = TakeWhile;
+function* Intersect(target, exceptions, condition, keySelect) {
+    if (keySelect) {
+        for (let value of target) {
+            if (condition == exceptions.has(keySelect(value)))
+                continue;
+            yield value;
+        }
+    }
+    else {
+        for (let value of target) {
+            if (condition == exceptions.has(value))
+                continue;
+            yield value;
+        }
+    }
+}
+exports.Intersect = Intersect;
+function* Repeat(value, count) {
+    for (let i = 0; i < count; i++) {
+        yield value;
+    }
+}
+exports.Repeat = Repeat;
+function* Range(value, count) {
+    let current = value;
+    for (let i = 0; i < count; i++) {
+        yield current;
+        current++;
+    }
+}
+exports.Range = Range;
+function* Union(first, second, keySelector) {
+    let set = new Set();
+    for (let value of first) {
+        let key = keySelector(value);
+        if (set.has(key))
+            continue;
+        set.add(key);
+        yield value;
+    }
+    for (let value of second) {
+        let key = keySelector(value);
+        if (set.has(key))
+            continue;
+        set.add(key);
+        yield value;
+    }
+}
+exports.Union = Union;
+function* UnionFast(first, second) {
+    let set = new Set();
+    for (let value of first) {
+        if (set.has(value))
+            continue;
+        set.add(value);
+        yield value;
+    }
+    for (let value of second) {
+        if (set.has(value))
+            continue;
+        set.add(value);
+        yield value;
+    }
+}
+exports.UnionFast = UnionFast;
+function* Join(target, oKeySelect, transform, map) {
+    for (let value of target) {
+        let key = oKeySelect(value);
+        if (!key)
+            continue;
+        let innerSet = map.get(key);
+        if (!innerSet)
+            continue;
+        for (let inner of innerSet) {
+            yield transform(value, inner);
+        }
+    }
+}
+exports.Join = Join;
+function* GroupJoin(target, oKeySelect, transform, map) {
+    for (let value of target) {
+        let innerSet = undefined;
+        let key = oKeySelect(value);
+        if (key) {
+            innerSet = map.get(key);
+        }
+        yield transform(value, innerSet);
+    }
+}
+exports.GroupJoin = GroupJoin;
+function* GroupBy(map, resultSelect) {
+    for (let key of map.keys()) {
+        yield resultSelect(key, map.get(key));
+    }
+}
+exports.GroupBy = GroupBy;
+function* SelectMany(target, selector, transform) {
+    let index = 0;
+    for (let item of target) {
+        for (let collectionItem of selector(item, index++)) {
+            yield transform(item, collectionItem);
+        }
+    }
+}
+exports.SelectMany = SelectMany;
+function* Concat(target, second) {
+    yield* target;
+    yield* second;
+}
+exports.Concat = Concat;
+function* Zip(first, second, transform, _index = 0) {
+    let iteratorOne = first[Symbol.iterator]();
+    let iteratorTwo = second[Symbol.iterator]();
+    let retOne, retTwo;
+    while (!(retOne = iteratorOne.next()).done && !(retTwo = iteratorTwo.next()).done) {
+        yield transform(retOne.value, retTwo.value);
+    }
+}
+exports.Zip = Zip;
+/** Copyright (c) ENikS.  All rights reserved. */
+
+},{}],70:[function(require,module,exports){
+"use strict";
+///////////////////////////////////////////////////////////////////////////////
+//
+// Licensed under the Apache License, Version 2.0  ( the  "License" );  you may 
+// not use this file except in compliance with the License.  You may  obtain  a 
+// copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required  by  applicable  law  or  agreed  to  in  writing,  software 
+// distributed under the License is distributed on an "AS  IS"  BASIS,  WITHOUT
+// WARRANTIES OR CONDITIONS  OF  ANY  KIND, either express or implied.  See the 
+// License for the specific  language  governing  permissions  and  limitations 
+// under the License.
+Object.defineProperty(exports, "__esModule", { value: true });
+//-----------------------------------------------------------------------------
+//  CSharp Enumerator implementation
+//-----------------------------------------------------------------------------
+//  Gets Iterator and turns it into CSharpEnumerator 
+class CSharpEnumerator {
+    constructor(sourceIterator) {
+        this._iterator = sourceIterator;
+    }
+    /** Gets the current element in the collection. */
+    get Current() {
+        return this._result.value;
+    }
+    /** Advances the enumerator to the next element of the collection.*/
+    MoveNext() {
+        this._result = this._iterator.next();
+        return !this._result.done;
+    }
+    /** Sets the enumerator to its initial position, which is before the first
+    * element in the collection. */
+    Reset() {
+        throw "JavaScript iterators could not be Reset";
+    }
+}
+exports.CSharpEnumerator = CSharpEnumerator;
+/** Copyright (c) ENikS.  All rights reserved. */
+
+},{}],71:[function(require,module,exports){
+"use strict";
+///////////////////////////////////////////////////////////////////////////////
+//
+// Licensed under the Apache License, Version 2.0  ( the  "License" );  you may 
+// not use this file except in compliance with the License.  You may  obtain  a 
+// copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required  by  applicable  law  or  agreed  to  in  writing,  software 
+// distributed under the License is distributed on an "AS  IS"  BASIS,  WITHOUT
+// WARRANTIES OR CONDITIONS  OF  ANY  KIND, either express or implied.  See the 
+// License for the specific  language  governing  permissions  and  limitations 
+// under the License.
+Object.defineProperty(exports, "__esModule", { value: true });
+const Generator = require("./generators");
+const Constant = require("./utilities");
+const Iterator = require("./iterators");
+//-----------------------------------------------------------------------------
+//  Implementation of EnumerableConstructor interface
+//-----------------------------------------------------------------------------
+/**
+* Converts any Iterable<T> object into LINQ-able object
+* @param TSource An Array, Map, Set, String or other Iterable object.
+*/
+function getEnumerable(TSource) {
+    return new EnumerableImpl(TSource);
+}
+exports.default = getEnumerable;
+exports.AsEnumerable = getEnumerable;
+exports.asEnumerable = getEnumerable;
+exports.From = getEnumerable;
+exports.from = getEnumerable;
+/**
+* Generates <count> of <T> elements starting with <start>. T is any
+* type which could be cast to number: number, enum, etc.
+* @param start First value in sequence.
+* @param count Number of elements to iteratel.
+* @example
+*     var sum = Range(0, 7).Sum();
+*/
+function getRange(start, count) {
+    return new EnumerableImpl(undefined, Generator.Range, [start, count]);
+}
+exports.range = getRange;
+exports.Range = getRange;
+/**
+* Repeat element <start> of type T <count> of times.
+* @param start First value in sequence.
+* @param count Number of elements to iteratel.
+* @example
+*     var sum = Repeat("v", 7);
+*/
+function getRepeat(value, count) {
+    return new EnumerableImpl(undefined, Generator.Repeat, [value, count]);
+}
+exports.repeat = getRepeat;
+exports.Repeat = getRepeat;
+//-----------------------------------------------------------------------------
+//  Enumerable Implementation
+//-----------------------------------------------------------------------------
+class EnumerableImpl {
+    constructor(target, factory, arg) {
+        this._target = target;
+        this._factory = factory;
+        this._factoryArg = arg;
+        // JavaScript naming convention
+        this['aggregate'] = this.Aggregate;
+        this['all'] = this.All;
+        this['any'] = this.Any;
+        this['average'] = this.Average;
+        this['chunkBy'] = this.ChunkBy;
+        this['contains'] = this.Contains;
+        this['count'] = this.Count;
+        this['max'] = this.Max;
+        this['min'] = this.Min;
+        this['elementAt'] = this.ElementAt;
+        this['elementAtOrDefault'] = this.ElementAtOrDefault;
+        this['first'] = this.First;
+        this['firstOrDefault'] = this.FirstOrDefault;
+        this['last'] = this.Last;
+        this['lastOrDefault'] = this.LastOrDefault;
+        this['sequenceEqual'] = this.SequenceEqual;
+        this['single'] = this.Single;
+        this['singleOrDefault'] = this.SingleOrDefault;
+        this['sum'] = this.Sum;
+        this['toArray'] = this.ToArray;
+        this['toMap'] = this.ToMap;
+        this['toDictionary'] = this.ToDictionary;
+        this['defaultIfEmpty'] = this.DefaultIfEmpty;
+        this['concat'] = this.Concat;
+        this['distinct'] = this.Distinct;
+        this['except'] = this.Except;
+        this['groupBy'] = this.GroupBy;
+        this['groupJoin'] = this.GroupJoin;
+        this['intersect'] = this.Intersect;
+        this['join'] = this.Join;
+        this['ofType'] = this.OfType;
+        this['orderBy'] = this.OrderBy;
+        this['orderByDescend'] = this.OrderByDescending;
+        this['range'] = this.Range;
+        this['repeat'] = this.Repeat;
+        this['reverse'] = this.Reverse;
+        this['select'] = this.Select;
+        this['selectMany'] = this.SelectMany;
+        this['skip'] = this.Skip;
+        this['skipWhile'] = this.SkipWhile;
+        this['take'] = this.Take;
+        this['takeWhile'] = this.TakeWhile;
+        this['union'] = this.Union;
+        this['where'] = this.Where;
+        this['zip'] = this.Zip;
+    }
+    ///////////////////////////////////////////////////////////////////////////
+    /** Returns JavaScript iterator */
+    [Symbol.iterator]() {
+        return (null != this._factory) ? this._factory.apply(this, this._factoryArg)
+            : this._target[Symbol.iterator]();
+    }
+    /** Returns C# style enumerator */
+    GetEnumerator() {
+        return new Iterator.CSharpEnumerator(this[Symbol.iterator]());
+    }
+    Aggregate(alpha, beta = Constant.selfFn, gamma = Constant.selfFn) {
+        let zero;
+        let method;
+        let selector;
+        if (Constant.CONST_FUNCTION === typeof alpha) {
+            method = alpha;
+            selector = beta;
+        }
+        else {
+            zero = alpha;
+            method = beta;
+            selector = gamma;
+        }
+        let result = zero;
+        for (let value of this) {
+            if (!result)
+                result = Constant.getDefaultVal(typeof (value));
+            result = method(result, value);
+        }
+        return selector(result);
+    }
+    All(predicate = Constant.trueFn) {
+        for (let value of this) {
+            if (!predicate(value)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    Any(predicate) {
+        let iterator;
+        // Check if at least one exist
+        if (!predicate && (iterator = this._target[Symbol.iterator]())) {
+            return !iterator.next().done;
+        }
+        // Check if any satisfy the criteria
+        for (let value of this) {
+            if (predicate(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    Average(func = Constant.selfFn) {
+        let sum = 0, count = 0;
+        for (let value of this) {
+            sum += func(value);
+            count++;
+        }
+        return sum / count;
+    }
+    Contains(value, equal = (a, b) => a === b) {
+        for (let item of this) {
+            if (equal(item, value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    Count(predicate) {
+        let count = 0;
+        if (predicate) {
+            for (let value of this) {
+                if (predicate(value)) {
+                    count++;
+                }
+            }
+        }
+        else if (this._target && this._target[Constant.CONST_LENGTH]) {
+            count = this._target[Constant.CONST_LENGTH];
+        }
+        else {
+            for (let value of this) {
+                count++;
+            }
+        }
+        return count;
+    }
+    Max(transform = Constant.selfFn) {
+        let value, max, hasValue = false;
+        for (let item of this) {
+            value = transform(item);
+            if (hasValue) {
+                if (max < value)
+                    max = value;
+            }
+            else {
+                max = value;
+                hasValue = true;
+            }
+        }
+        if (!hasValue)
+            throw Constant.CONST_NO_ELEMENTS;
+        return max;
+    }
+    Min(transform = Constant.selfFn) {
+        let value, min, hasValue = false;
+        for (let item of this) {
+            value = transform(item);
+            if (hasValue) {
+                if (min > value)
+                    min = value;
+            }
+            else {
+                min = value;
+                hasValue = true;
+            }
+        }
+        if (!hasValue)
+            throw Constant.CONST_NO_ELEMENTS;
+        return min;
+    }
+    ElementAt(index) {
+        if (Array.isArray(this._target)) {
+            if (0 > index ||
+                this._target[Constant.CONST_LENGTH] <= index) {
+                throw Constant.CONST_OUTOFRANGE;
+            }
+            return this._target[index];
+        }
+        let count = 0;
+        for (let value of this) {
+            if (index > count++) {
+                continue;
+            }
+            return value;
+        }
+        throw Constant.CONST_OUTOFRANGE;
+    }
+    ElementAtOrDefault(index) {
+        if (Array.isArray(this._target)) {
+            let length = this._target[Constant.CONST_LENGTH];
+            if (0 > index || length <= index) {
+                let value = this._target[0];
+                return 0 < length
+                    ? Constant.getDefaultVal(typeof (value), value)
+                    : undefined;
+            }
+            return this._target[index];
+        }
+        let value, count = 0;
+        for (let item of this) {
+            if (index === count++) {
+                return item;
+            }
+            value = item;
+        }
+        return Constant.getDefaultVal(typeof value, value); // Last good value
+    }
+    First(predicate = Constant.trueFn) {
+        for (let value of this) {
+            if (predicate(value)) {
+                return value;
+            }
+        }
+        throw Constant.CONST_NOTHING_FOUND;
+    }
+    FirstOrDefault(predicate = Constant.trueFn) {
+        let value;
+        for (let item of this) {
+            value = item;
+            if (predicate(item)) {
+                return item;
+            }
+        }
+        return Constant.getDefaultVal(typeof value); // Last good value
+    }
+    Last(predicate = Constant.trueFn) {
+        let value, found = false;
+        for (let item of this) {
+            if (predicate(item)) {
+                value = item;
+                found = true;
+            }
+        }
+        if (!found) {
+            throw Constant.CONST_NOTHING_FOUND;
+        }
+        return value;
+    }
+    LastOrDefault(predicate = Constant.trueFn) {
+        let value, lastKnown, found = false;
+        for (let item of this) {
+            if (predicate(item)) {
+                value = item;
+                found = true;
+            }
+            lastKnown = item;
+        }
+        return (found) ? value : Constant.getDefaultVal(typeof lastKnown);
+    }
+    SequenceEqual(other, equal = (a, b) => a === b) {
+        let res1, res2;
+        let it1 = this[Symbol.iterator]();
+        let it2 = other[Symbol.iterator]();
+        while (true) {
+            res1 = it1.next();
+            res2 = it2.next();
+            if (res1.done && res2.done)
+                return true;
+            if ((res1.done != res2.done) || !equal(res1.value, res2.value)) {
+                return false;
+            }
+        }
+        ;
+    }
+    Single(predicate = Constant.trueFn) {
+        let value, hasValue = false;
+        for (let item of this) {
+            if (predicate(item)) {
+                if (!hasValue) {
+                    value = item;
+                    hasValue = true;
+                }
+                else {
+                    throw Constant.CONST_TOO_MANY;
+                }
+            }
+        }
+        if (hasValue)
+            return value;
+        throw Constant.CONST_NOTHING_FOUND;
+    }
+    SingleOrDefault(predicate = Constant.trueFn) {
+        let value, lastKnown, hasValue = false;
+        for (let item of this) {
+            if (predicate(item)) {
+                if (!hasValue) {
+                    value = item;
+                    hasValue = true;
+                }
+                else {
+                    throw Constant.CONST_TOO_MANY;
+                }
+            }
+            lastKnown = item;
+        }
+        return (hasValue) ? value : Constant.getDefaultVal(typeof lastKnown);
+    }
+    Sum(transform = Constant.selfFn) {
+        let sum = 0;
+        for (let value of this) {
+            sum += transform(value);
+        }
+        return sum;
+    }
+    ToArray() {
+        let array = [];
+        for (let value of this) {
+            array.push(value);
+        }
+        return array;
+    }
+    ToMap(keySelector, elementSelector = Constant.selfFn) {
+        let dictionary = new Map();
+        for (let value of this) {
+            dictionary.set(keySelector(value), elementSelector(value));
+        }
+        return dictionary;
+    }
+    ToDictionary(keySelector, elementSelector = Constant.selfFn) {
+        let dictionary = new Map();
+        for (let value of this) {
+            dictionary.set(keySelector(value), elementSelector(value));
+        }
+        return dictionary;
+    }
+    Cast() {
+        // TODO: Remove any once TypeScript 2.0 out
+        return this;
+    }
+    //-------------------------------------------------------------------------
+    //  Deferred execution methods
+    //-------------------------------------------------------------------------
+    DefaultIfEmpty(defaultValue = undefined) {
+        return new EnumerableImpl(undefined, Generator.DefaultIfEmpty, [this, defaultValue]);
+    }
+    Concat(second) {
+        return new EnumerableImpl(undefined, Generator.Concat, [this, second]);
+    }
+    ChunkBy(keySelect, elementSelector = Constant.selfFn, resultSelector = (a, b) => b) {
+        return new EnumerableImpl(undefined, Generator.ChunkBy, [this, keySelect, elementSelector, resultSelector]);
+    }
+    Distinct(keySelector) {
+        if (keySelector)
+            return new EnumerableImpl(undefined, Generator.Distinct, [this, keySelector]);
+        return new EnumerableImpl(undefined, Generator.DistinctFast, [this]);
+    }
+    Except(other, keySelector) {
+        return new EnumerableImpl(undefined, Generator.Intersect, [this, Constant.getKeys(other, keySelector), true, keySelector]);
+    }
+    GroupBy(selKey, selElement = Constant.selfFn, selResult = Constant.defGrouping) {
+        let map = Constant.getKeyedMap(this, selKey, selElement);
+        return new EnumerableImpl(undefined, Generator.GroupBy, [map, selResult]);
+    }
+    GroupJoin(inner, oKeySelect, iKeySelect, resultSelector = Constant.defGrouping) {
+        return new EnumerableImpl(undefined, Generator.GroupJoin, [this, oKeySelect, resultSelector,
+            Constant.getKeyedMapFast(inner, iKeySelect)]);
+    }
+    Intersect(other, keySelector) {
+        return new EnumerableImpl(undefined, Generator.Intersect, [this,
+            Constant.getKeys(other, keySelector),
+            false, keySelector]);
+    }
+    Join(inner, oSelector, iSelector, transform) {
+        return new EnumerableImpl(undefined, Generator.Join, [this, oSelector, transform, Constant.getKeyedMapFast(inner, iSelector)]);
+    }
+    OfType(obj) {
+        let typeName;
+        switch (obj) {
+            case Number:
+                typeName = Constant.CONST_NUMBER;
+                break;
+            case Boolean:
+                typeName = Constant.CONST_BOOLEAN;
+                break;
+            case String:
+                typeName = Constant.CONST_STRING;
+                break;
+            case Symbol:
+                typeName = Constant.CONST_SYMBOL;
+                break;
+            default:
+                typeName = undefined;
+        }
+        return new EnumerableImpl(undefined, Generator.OfType, [this, obj, typeName]);
+    }
+    OrderBy(keySelect, equal, generator = Generator.Forward) {
+        var comparer = equal ? equal : Constant.defCompare;
+        var compare = !keySelect && !equal ? undefined
+            : keySelect ? (a, b) => comparer(keySelect(a), keySelect(b)) : (a, b) => comparer(a, b);
+        return new OrderedLinq(this, (array) => generator(array), compare);
+    }
+    OrderByDescending(keySelect, equal) {
+        return this.OrderBy(keySelect, equal, Generator.Reverse);
+    }
+    Range(start, count) {
+        return new EnumerableImpl(undefined, Generator.Range, [start, count]);
+    }
+    Repeat(element, count) {
+        return new EnumerableImpl(undefined, Generator.Repeat, [element, count]);
+    }
+    Reverse() {
+        let array = Array.isArray(this._target)
+            ? this._target : this.ToArray();
+        return new EnumerableImpl(undefined, Generator.Reverse, [array]);
+    }
+    Select(transform) {
+        return new EnumerableImpl(undefined, Generator.Select, [this, transform]);
+    }
+    SelectMany(selector = Constant.selfFn, result = (x, s) => s) {
+        return new EnumerableImpl(undefined, Generator.SelectMany, [this, selector, result]);
+    }
+    Skip(skip) {
+        return new EnumerableImpl(undefined, Generator.Skip, [this, skip]);
+    }
+    SkipWhile(predicate) {
+        return new EnumerableImpl(undefined, Generator.SkipWhile, [this, predicate]);
+    }
+    Take(take) {
+        return new EnumerableImpl(undefined, Generator.TakeWhile, [this, (a, n) => take > n]);
+    }
+    TakeWhile(predicate) {
+        return new EnumerableImpl(undefined, Generator.TakeWhile, [this, predicate]);
+    }
+    Union(second, keySelector) {
+        if (keySelector)
+            return new EnumerableImpl(undefined, Generator.Union, [this, second, keySelector]);
+        return new EnumerableImpl(undefined, Generator.UnionFast, [this, second]);
+    }
+    Where(predicate = Constant.trueFn) {
+        return new EnumerableImpl(undefined, Generator.Where, [this, predicate]);
+    }
+    Zip(second, func) {
+        return new EnumerableImpl(undefined, Generator.Zip, [this, second, func]);
+    }
+}
+class OrderedLinq extends EnumerableImpl {
+    constructor(target, factory, equal) {
+        super(target, factory);
+        this.equal = equal;
+        this['thenBy'] = this.ThenBy;
+        this['thenByDescending'] = this.ThenByDescending;
+    }
+    [Symbol.iterator]() {
+        if (!this._factoryArg) {
+            this._factoryArg = this._target.ToArray();
+            if (this.equal) {
+                this._factoryArg.sort(this.equal);
+            }
+            else {
+                this._factoryArg.sort();
+            }
+        }
+        return this._factory(this._factoryArg);
+    }
+    ThenBy(keySelect, equal, generator = Generator.Forward) {
+        var comparer = equal ? equal : Constant.defCompare;
+        var compare = !keySelect && !equal ? undefined
+            : keySelect ? (a, b) => comparer(keySelect(a), keySelect(b)) : (a, b) => comparer(a, b);
+        if (!compare)
+            return this;
+        if (!this.equal) {
+            this.equal = compare;
+        }
+        else {
+            let superEqual = this.equal;
+            this.equal = (a, b) => {
+                let result = superEqual(a, b);
+                return (0 != result) ? result : compare(a, b);
+            };
+        }
+        return this;
+    }
+    ThenByDescending(keySelect, equal) {
+        return this.ThenBy(keySelect, equal, Generator.Reverse);
+    }
+}
+/** Copyright (c) ENikS.  All rights reserved. */
+
+},{"./generators":69,"./iterators":70,"./utilities":72}],72:[function(require,module,exports){
+"use strict";
+///////////////////////////////////////////////////////////////////////////////
+//
+// Licensed under the Apache License, Version 2.0  ( the  "License" );  you may 
+// not use this file except in compliance with the License.  You may  obtain  a 
+// copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required  by  applicable  law  or  agreed  to  in  writing,  software 
+// distributed under the License is distributed on an "AS  IS"  BASIS,  WITHOUT
+// WARRANTIES OR CONDITIONS  OF  ANY  KIND, either express or implied.  See the 
+// License for the specific  language  governing  permissions  and  limitations 
+// under the License.
+Object.defineProperty(exports, "__esModule", { value: true });
+//-----------------------------------------------------------------------------
+// Utility Functions
+//-----------------------------------------------------------------------------
+/** Default predicate, always true */
+exports.trueFn = () => true;
+/** Default transformer, returns self */
+exports.selfFn = (o) => o;
+/** Default Grouping */
+exports.defGrouping = (a, b) => {
+    if (!b[exports.CONST_KEY]) {
+        b[exports.CONST_KEY] = a;
+    }
+    return b;
+};
+exports.defCompare = (a, b) => {
+    return a === b ? 0
+        : a > b ? 1
+            : -1;
+};
+/** Returns default value for the type */
+function getDefaultVal(type, value = undefined) {
+    if (typeof type !== exports.CONST_STRING)
+        throw new TypeError(exports.CONST_NO_STRING);
+    // Handle simple types (primitives and plain function/object)
+    switch (type) {
+        case exports.CONST_BOOLEAN: return false;
+        case exports.CONST_NUMBER: return 0;
+        case exports.CONST_OBJECT: return null === value ? null : undefined;
+        case exports.CONST_STRING: return exports.CONST_EMPTY_STRING;
+        case exports.CONST_SYMBOL: return Symbol();
+    }
+    return undefined;
+}
+exports.getDefaultVal = getDefaultVal;
+/** Returns a map of element bsed on extracted keys  **/
+function getKeyedMap(iterable, keySelector, selElement = exports.selfFn) {
+    let map = new Map();
+    for (let value of iterable) {
+        let key = keySelector(value);
+        if (!key)
+            continue;
+        let group = map.get(key);
+        if (!group) {
+            group = [];
+            map.set(key, group);
+        }
+        group.push(selElement(value));
+    }
+    return map;
+}
+exports.getKeyedMap = getKeyedMap;
+function getKeyedMapFast(iterable, keySelector) {
+    let map = new Map();
+    for (let value of iterable) {
+        let key = keySelector(value);
+        if (!key)
+            continue;
+        let group = map.get(key);
+        if (!group) {
+            group = [];
+            map.set(key, group);
+        }
+        group.push(value);
+    }
+    return map;
+}
+exports.getKeyedMapFast = getKeyedMapFast;
+function getKeys(iterable, keySelector) {
+    let set = new Set();
+    if (keySelector) {
+        for (let value of iterable) {
+            let key = keySelector(value);
+            if (!key)
+                continue;
+            set.add(key);
+        }
+    }
+    else {
+        for (let value of iterable) {
+            if (!value)
+                continue;
+            set.add(value);
+        }
+    }
+    return set;
+}
+exports.getKeys = getKeys;
+//-----------------------------------------------------------------------------
+//  Constants
+//-----------------------------------------------------------------------------
+exports.CONST_INVALID_KEY = "Key selector returned undefined Key";
+exports.CONST_NO_STRING = "Type must be a string.";
+exports.CONST_DUPLICATE = "Object already has property [key]";
+exports.CONST_NOTHING_FOUND = "No element satisfies the condition in predicate";
+exports.CONST_NO_ELEMENTS = "The source sequence is empty.";
+exports.CONST_TOO_MANY = "More than one element satisfies the condition in predicate.";
+exports.CONST_OUTOFRANGE = "Argument Out Of Range";
+exports.CONST_KEY = "key";
+exports.CONST_UNDEFINED = "undefined";
+exports.CONST_LENGTH = "length";
+exports.CONST_FUNCTION = "function";
+exports.CONST_BOOLEAN = "boolean";
+exports.CONST_NUMBER = "number";
+exports.CONST_OBJECT = "object";
+exports.CONST_STRING = "string";
+exports.CONST_SYMBOL = "symbol";
+exports.CONST_EMPTY_STRING = "";
+/** Copyright (c) ENikS.  All rights reserved. */
+
+},{}],73:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2696,7 +3701,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],70:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 var Vue // late bind
 var version
 var map = window.__VUE_HOT_MAP__ = Object.create(null)
@@ -2842,7 +3847,7 @@ exports.reload = tryWrap(function (id, options) {
   })
 })
 
-},{}],71:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 (function (global){
 /*!
  * Vue.js v2.3.4
@@ -12531,7 +13536,7 @@ return Vue$3;
 })));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],72:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 (function (process,global){
 /*!
  * Vue.js v2.3.4
@@ -19673,7 +20678,7 @@ setTimeout(function () {
 module.exports = Vue$3;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":69}],73:[function(require,module,exports){
+},{"_process":73}],77:[function(require,module,exports){
 /**
  * vuex v2.3.0
  * (c) 2017 Evan You
@@ -20484,7 +21489,7 @@ return index;
 
 })));
 
-},{}],74:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 module.exports = {
   playlists : ['4bzkFX8ZvDxiXXWPqicuI0','1bQY0mIdsALHh6Uc9KcA1a'],
   root_url: 'http://localapp.com:3000/'

@@ -2,7 +2,7 @@
 <div class="form">
   <div class="form-group">
     <label>Playlist</label>
-    <select class="form-control" v-model="playlist_idx">
+    <select class="form-control" v-model="playlist_idx" @change="reFetch">
       <option v-for="id in playlists_ids" :value="id">{{id}}</option>
     </select>
   </div>
@@ -26,7 +26,7 @@
       <option value="50">50</option>
     </select>
   </div>
-  <button type="button" class="btn btn-primary" @click="reFetch">Refresh</button>
+  <button type="button" class="btn btn-primary" @click="submit">Refresh</button>
 </div>
 </template>
 
@@ -81,6 +81,9 @@ export default {
     }
   },
   methods:{
+    submit:function(){
+      this.$store.dispatch('filterUpdate');
+    },
     reFetch:function(){
       this.$store.dispatch('fetchData');
     }

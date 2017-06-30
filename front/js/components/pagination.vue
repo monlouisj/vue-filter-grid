@@ -24,8 +24,7 @@ export default {
       return arr;
     },
     pages_count(){
-      if(typeof this.$store.state.playlists[this.$store.state.playlist_idx] === "undefined") return false;
-      var len = this.$store.state.playlists[this.$store.state.playlist_idx].length;
+      var len = this.$store.state.filtered.length;
       return Math.ceil(len/this.per_page);
     },
     page_idx(){
@@ -35,12 +34,15 @@ export default {
   methods: {
     goTo(n){
       this.$store.commit('updateFilter',{field:'page_idx', val: n});
+      this.$store.dispatch('filterUpdate');
     },
     goTo1st(){
       this.$store.commit('updateFilter',{field:'page_idx', val: 0});
+      this.$store.dispatch('filterUpdate');
     },
     goToLast(){
-      this.$store.commit('updateFilter',{field:'page_idx', val: this.pages_count-1});
+      this.$store.commit('updateFilter',{field:'page_idx', val: this.pages_count-2});
+      this.$store.dispatch('filterUpdate');
     }
   }
 }

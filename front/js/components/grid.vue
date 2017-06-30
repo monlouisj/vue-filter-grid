@@ -3,7 +3,7 @@
   <p>...</p>
 </div>
 <div class="row" v-else>
-  <div class="col-xs-12 col-sm-3" v-for="(trk,y) in tracks">
+  <div class="col-xs-12 col-sm-2" v-for="(trk,y) in tracks">
     <div class="card card-inverse">
       <img class="card-img img-fluid" :src="trk.img.url" :alt="trk.name">
       <div class="card-img-overlay">
@@ -24,9 +24,7 @@ export default {
       return this.$store.state.isLoading;
     },
     tracks(){
-      if(typeof this.$store.state.playlists[this.$store.state.playlist_idx] === "undefined") return false;
-      var all_tracks = this.$store.state.playlists[this.$store.state.playlist_idx];
-      return all_tracks.slice(this.$store.state.page_idx, this.$store.state.per_page);
+      return this.$store.state.tracks;
     }
   },
   methods:{}

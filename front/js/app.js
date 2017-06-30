@@ -19,6 +19,7 @@ ready(function(){
     store,
     components: {Filters, Grid, Pagination},
     created: function(){
+      this.$store.dispatch('filterUpdate');
       this.$store.dispatch('fetchData');
     }
   });
