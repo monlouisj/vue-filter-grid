@@ -2,7 +2,8 @@ var Vue = require('vue/dist/vue.js'),
 Vuex = require('vuex'),
 config = require('../../public_config'),
 axios = require('axios'),
-linq = require('linq-es2015');
+linq = require('linq-es2015'),
+imagesLoaded = require('imagesLoaded');
 
 Vue.use(Vuex);
 
@@ -19,18 +20,20 @@ module.exports = new Vuex.Store({
     byArtist: '',
     byName: '',
     byAlbum: '',
-    per_page: 20,
+    per_page: 24,
     page_idx: 0
   },
   actions:{
     fetchData: function(context){
+      context.commit('isLoading',{on:true});
       var url = "".concat('json/playlist-',context.state.playlist_idx,'.json');
 
       //fetch json data
-      axios.get(url)
+      return axios.get(url)
       .then((response) => {
         if(typeof response.data !== "object") throw new Error('data undefined');
         context.commit('setResults', {tracks: response.data});
+        context.commit('isLoading',{on:false});
       })
       .catch(function (error) {
         throw new Error('xhr error');
@@ -66,12 +69,20 @@ module.exports = new Vuex.Store({
   mutations:{
     showLoadMask: (state) => state.isLoading = true,
     hideLoadMask: (state) => state.isLoading = false,
-    setFiltered: (state, arg) => state.filtered = arg.filtered,
+    setFiltered(state, arg){
+      state.filtered = arg.filtered;
+      state.isLoading = true;
+      imagesLoaded(config.mainEl,function () {
+        console.log("ish ish");
+        state.isLoading = false;
+      });
+    },
     setTracks: (state, arg) => state.tracks = arg.tracks,
-    setResults: (state, arg) => {
+    setResults(state, arg){
       var playlist_id = state.playlist_idx;
       state.playlists[playlist_id] = arg.tracks;
     },
-    updateFilter:(state, arg) => state[arg.field] = arg.val
+    updateFilter: (state, arg) => state[arg.field] = arg.val,
+    isLoading: (state,arg) => state.isLoading = arg.on
   }
 });

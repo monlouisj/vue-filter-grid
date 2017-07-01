@@ -19,7 +19,7 @@ var _appjs = './front/js/app.js';
 gulp.task('install', function() {
   var libz = [
     './node_modules/jquery/dist/jquery.min.js',
-    './node_modules/daemonite-material/css/material.min.css',
+    //'./node_modules/daemonite-material/css/material.min.css',
     './node_modules/daemonite-material/js/material.min.js'
   ];
   gulp.src(libz)

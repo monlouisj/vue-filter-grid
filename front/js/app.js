@@ -3,24 +3,25 @@ Vue = require('vue/dist/vue.js'),
 store = require('./store.js'),
 Filters = require('./components/filters.vue'),
 Grid = require('./components/grid.vue'),
-Pagination = require('./components/pagination.vue'),
-imagesLoaded = require('imagesloaded');
+Pagination = require('./components/pagination.vue')
+;
 
 var ready = (fn) => document.readyState != 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
 
 ready(function(){
   Vue.filter('wrap', function(v){
-      if(v.length > 80) v = v.substr(0,80).concat('...');
+      if(v.length > 40) v = v.substr(0,40).concat('...');
       return v;
   });
 
   var app = new Vue({
-    el: '#app',
+    el: config.mainEl,
     store,
     components: {Filters, Grid, Pagination},
     created: function(){
-      this.$store.dispatch('filterUpdate');
-      this.$store.dispatch('fetchData');
+      this.$store.dispatch('fetchData').then(function(){
+        this.$store.dispatch('filterUpdate');
+      }.bind(this));
     }
   });
 });

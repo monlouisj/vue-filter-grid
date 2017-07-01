@@ -4,29 +4,30 @@ Vue = require('vue/dist/vue.js'),
 store = require('./store.js'),
 Filters = require('./components/filters.vue'),
 Grid = require('./components/grid.vue'),
-Pagination = require('./components/pagination.vue'),
-imagesLoaded = require('imagesloaded');
+Pagination = require('./components/pagination.vue')
+;
 
 var ready = (fn) => document.readyState != 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
 
 ready(function(){
   Vue.filter('wrap', function(v){
-      if(v.length > 80) v = v.substr(0,80).concat('...');
+      if(v.length > 40) v = v.substr(0,40).concat('...');
       return v;
   });
 
   var app = new Vue({
-    el: '#app',
+    el: config.mainEl,
     store,
     components: {Filters, Grid, Pagination},
     created: function(){
-      this.$store.dispatch('filterUpdate');
-      this.$store.dispatch('fetchData');
+      this.$store.dispatch('fetchData').then(function(){
+        this.$store.dispatch('filterUpdate');
+      }.bind(this));
     }
   });
 });
 
-},{"../../public_config":78,"./components/filters.vue":2,"./components/grid.vue":3,"./components/pagination.vue":4,"./store.js":5,"imagesloaded":67,"vue/dist/vue.js":75}],2:[function(require,module,exports){
+},{"../../public_config":78,"./components/filters.vue":2,"./components/grid.vue":3,"./components/pagination.vue":4,"./store.js":5,"vue/dist/vue.js":75}],2:[function(require,module,exports){
 ;(function(){
 'use strict';
 
@@ -106,7 +107,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Playlist")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.playlist_idx),expression:"playlist_idx"}],staticClass:"form-control",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.playlist_idx=$event.target.multiple ? $$selectedVal : $$selectedVal[0]},_vm.reFetch]}},_vm._l((_vm.playlists_ids),function(id){return _c('option',{domProps:{"value":id}},[_vm._v(_vm._s(id))])}))]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by artist")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byArtist),expression:"byArtist"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"artist"},domProps:{"value":(_vm.byArtist)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byArtist=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by name")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byName),expression:"byName"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"name"},domProps:{"value":(_vm.byName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byName=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by album")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byAlbum),expression:"byAlbum"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"album"},domProps:{"value":(_vm.byAlbum)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byAlbum=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Items per page")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.per_page),expression:"per_page"}],staticClass:"form-control",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.per_page=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},[_c('option',{attrs:{"value":"10"}},[_vm._v("10")]),_vm._v(" "),_c('option',{attrs:{"value":"20"}},[_vm._v("20")]),_vm._v(" "),_c('option',{attrs:{"value":"50"}},[_vm._v("50")])])]),_vm._v(" "),_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.submit}},[_vm._v("Refresh")])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Playlist")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.playlist_idx),expression:"playlist_idx"}],staticClass:"form-control",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.playlist_idx=$event.target.multiple ? $$selectedVal : $$selectedVal[0]},_vm.reFetch]}},_vm._l((_vm.playlists_ids),function(id){return _c('option',{domProps:{"value":id}},[_vm._v(_vm._s(id))])}))]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by artist")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byArtist),expression:"byArtist"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"artist"},domProps:{"value":(_vm.byArtist)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byArtist=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by name")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byName),expression:"byName"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"name"},domProps:{"value":(_vm.byName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byName=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Search by album")]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.byAlbum),expression:"byAlbum"}],staticClass:"form-control",attrs:{"type":"text","placeholder":"album"},domProps:{"value":(_vm.byAlbum)},on:{"input":function($event){if($event.target.composing){ return; }_vm.byAlbum=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Items per page")]),_vm._v(" "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.per_page),expression:"per_page"}],staticClass:"form-control",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.per_page=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},[_c('option',{attrs:{"value":"12"}},[_vm._v("12")]),_vm._v(" "),_c('option',{attrs:{"value":"24"}},[_vm._v("24")]),_vm._v(" "),_c('option',{attrs:{"value":"60"}},[_vm._v("60")])])]),_vm._v(" "),_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.submit}},[_vm._v("Refresh")])])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -141,7 +142,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isLoading)?_c('div',{staticClass:"loadmask"},[_c('p',[_vm._v("...")])]):_c('div',{staticClass:"row"},_vm._l((_vm.tracks),function(trk,y){return _c('div',{staticClass:"col-xs-12 col-sm-2"},[_c('div',{staticClass:"card card-inverse"},[_c('img',{staticClass:"card-img img-fluid",attrs:{"src":trk.img.url,"alt":trk.name}}),_vm._v(" "),_c('div',{staticClass:"card-img-overlay"},[_c('h4',{staticClass:"card-title"},[_vm._v(_vm._s(_vm._f("wrap")(trk.name)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_vm._v(_vm._s(_vm._f("wrap")(trk.artist)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_c('small',{staticClass:"text-muted"},[_vm._v(_vm._s(_vm._f("wrap")(trk.album)))])])])])])}))}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isLoading)?_c('div',{staticClass:"loadmask"},[_c('p',[_vm._v("...")])]):_c('div',{staticClass:"row"},_vm._l((_vm.tracks),function(trk,y){return _c('div',{staticClass:"col-xs-12 col-sm-3 col-md-2"},[_c('div',{staticClass:"card card-inverse"},[_c('img',{staticClass:"card-img img-fluid",attrs:{"src":trk.img.url,"alt":trk.name}}),_vm._v(" "),_c('div',{staticClass:"card-img-overlay"},[_c('h4',{staticClass:"card-title"},[_vm._v(_vm._s(_vm._f("wrap")(trk.name)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_vm._v(_vm._s(_vm._f("wrap")(trk.artist)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_c('small',{},[_vm._v(_vm._s(_vm._f("wrap")(trk.album)))])])])])])}))}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -210,7 +211,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-33f50366", __vue__options__)
   } else {
-    hotAPI.reload("data-v-33f50366", __vue__options__)
+    hotAPI.rerender("data-v-33f50366", __vue__options__)
   }
 })()}
 },{"vue":76,"vue-hot-reload-api":74}],5:[function(require,module,exports){
@@ -218,7 +219,8 @@ var Vue = require('vue/dist/vue.js'),
 Vuex = require('vuex'),
 config = require('../../public_config'),
 axios = require('axios'),
-linq = require('linq-es2015');
+linq = require('linq-es2015'),
+imagesLoaded = require('imagesLoaded');
 
 Vue.use(Vuex);
 
@@ -235,18 +237,20 @@ module.exports = new Vuex.Store({
     byArtist: '',
     byName: '',
     byAlbum: '',
-    per_page: 20,
+    per_page: 24,
     page_idx: 0
   },
   actions:{
     fetchData: function(context){
+      context.commit('isLoading',{on:true});
       var url = "".concat('json/playlist-',context.state.playlist_idx,'.json');
 
       //fetch json data
-      axios.get(url)
+      return axios.get(url)
       .then((response) => {
         if(typeof response.data !== "object") throw new Error('data undefined');
         context.commit('setResults', {tracks: response.data});
+        context.commit('isLoading',{on:false});
       })
       .catch(function (error) {
         throw new Error('xhr error');
@@ -282,17 +286,25 @@ module.exports = new Vuex.Store({
   mutations:{
     showLoadMask: (state) => state.isLoading = true,
     hideLoadMask: (state) => state.isLoading = false,
-    setFiltered: (state, arg) => state.filtered = arg.filtered,
+    setFiltered(state, arg){
+      state.filtered = arg.filtered;
+      state.isLoading = true;
+      imagesLoaded(config.mainEl,function () {
+        console.log("ish ish");
+        state.isLoading = false;
+      });
+    },
     setTracks: (state, arg) => state.tracks = arg.tracks,
-    setResults: (state, arg) => {
+    setResults(state, arg){
       var playlist_id = state.playlist_idx;
       state.playlists[playlist_id] = arg.tracks;
     },
-    updateFilter:(state, arg) => state[arg.field] = arg.val
+    updateFilter: (state, arg) => state[arg.field] = arg.val,
+    isLoading: (state,arg) => state.isLoading = arg.on
   }
 });
 
-},{"../../public_config":78,"axios":6,"linq-es2015":71,"vue/dist/vue.js":75,"vuex":77}],6:[function(require,module,exports){
+},{"../../public_config":78,"axios":6,"imagesLoaded":67,"linq-es2015":71,"vue/dist/vue.js":75,"vuex":77}],6:[function(require,module,exports){
 module.exports = require('./lib/axios');
 },{"./lib/axios":8}],7:[function(require,module,exports){
 (function (process){
@@ -21491,6 +21503,7 @@ return index;
 
 },{}],78:[function(require,module,exports){
 module.exports = {
+  mainEl: '#app',
   playlists : ['4bzkFX8ZvDxiXXWPqicuI0','1bQY0mIdsALHh6Uc9KcA1a'],
   root_url: 'http://localapp.com:3000/'
 }
