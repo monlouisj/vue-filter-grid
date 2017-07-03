@@ -19,9 +19,19 @@ ready(function(){
     store,
     components: {Filters, Grid, Pagination},
     created: function(){
-      this.$store.dispatch('fetchData').then(function(){
-        this.$store.dispatch('filterUpdate');
-      }.bind(this));
+      var todo = config.playlists.length-1;
+      var that = this;
+      var playlists = config.playlists;
+
+      var doOne = function(idx){
+        that.$store.commit('updateFilter',{ field:'playlist_idx', val: playlists[idx] });
+        that.$store.dispatch('fetchData').then(function(){
+          that.$store.dispatch('filterUpdate');
+          todo --;
+          if(todo > -1) doOne(todo);
+        }.bind(that));
+      }
+      doOne(todo);
     }
   });
 });

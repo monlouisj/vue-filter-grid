@@ -2,8 +2,8 @@
 <div class="form">
   <div class="form-group">
     <label>Playlist</label>
-    <select class="form-control" v-model="playlist_idx" @change="reFetch">
-      <option v-for="id in playlists_ids" :value="id">{{id}}</option>
+    <select class="form-control" v-model="playlist_idx">
+      <option v-for="(p,id) in playlists" :value="id">{{p.name}}</option>
     </select>
   </div>
   <div class="form-group">
@@ -26,7 +26,8 @@
       <option value="60">60</option>
     </select>
   </div>
-  <button type="button" class="btn btn-primary" @click="submit">Refresh</button>
+  <button type="button" class="btn btn-primary" @click="submit">Search</button>
+  <button type="button" class="btn btn-info" @click="reset">Reset</button>
 </div>
 </template>
 
@@ -36,6 +37,7 @@ export default {
   name: 'Filters',
   store,
   computed: {
+    playlists(){ return this.$store.state.playlists },
     playlist_idx:{
       get(){
         return this.$store.state.playlist_idx;
@@ -51,9 +53,6 @@ export default {
       set:function(v){
         this.$store.commit('updateFilter',{field:'per_page', val: v})
       }
-    },
-    playlists_ids(){
-      return Object.keys(this.$store.state.playlists);
     },
     byArtist: {
       get:function(){
@@ -81,11 +80,13 @@ export default {
     }
   },
   methods:{
-    submit:function(){
+    submit(){
       this.$store.dispatch('filterUpdate');
     },
-    reFetch:function(){
-      this.$store.dispatch('fetchData');
+    reset(){
+      ['byArtist','byName','byAlbum'].forEach(function(f){
+        this.$store.commit('updateFilter',{field:f, val: ''});
+      }.bind(this));
     }
   }
 }

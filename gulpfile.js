@@ -11,6 +11,7 @@ livereload = require('gulp-livereload'),
 rename = require('gulp-rename'),
 sass = require('gulp-sass'),
 source = require('vinyl-source-stream'),
+babelify = require("babelify"),
 vueify = require('vueify');
 
 var _stylescss = './front/sass/style.scss';
@@ -28,6 +29,7 @@ gulp.task('install', function() {
 
 gulp.task('js', function() {
   var bfy = browserify(_appjs)
+  .transform("babelify", {presets: ["es2015"]})
   .transform(vueify)
   .bundle();
 

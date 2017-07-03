@@ -1,4 +1,5 @@
 var api = require("spotify-web-api-node"),
+playlistModel = require('./playlistModel.js'),
 conf = require('../config.js'),
 fs = require('fs');
 
@@ -12,12 +13,18 @@ var spotifyApi = new api({
 });
 
 var mytracks = [];
+var playlist_name = "";
 var counter = 0;
 var all_playlists = conf.playlists;
 var playlist_id = all_playlists.pop();
 
 var fetch = function(_offset){
-  return spotifyApi.getPlaylistTracks(conf.myId,playlist_id,{offset: _offset,limit:LIMIT})
+
+  return spotifyApi.getPlaylist(conf.myId,playlist_id)
+  .then(function(data){
+    playlist_name = data.body.name;
+    return spotifyApi.getPlaylistTracks(conf.myId,playlist_id,{offset: _offset,limit:LIMIT})
+  })
   .then(function(data) {
     try {
       var tracks = data.body.items;
@@ -50,7 +57,8 @@ var fetch = function(_offset){
 
     if(total == mytracks.length){
 
-      fs.writeFileSync(SAVE_TO + '/playlist-' + playlist_id + '.json', JSON.stringify(mytracks));
+      fs.writeFileSync(SAVE_TO + '/playlist-' + playlist_id + '.json', JSON.stringify(new playlistModel({ name: playlist_name, tracks: mytracks })));
+      playlist_name = "";
       mytracks = [];
       counter = 0
       playlist_id = all_playlists.pop();

@@ -284,7 +284,7 @@ legend {
   padding: 0;
   width: 100%;
   font-size: 1rem;
-  font-weight: normal;
+  font-weight: 500;
   letter-spacing: 0;
   line-height: 1rem; }
 
@@ -1215,7 +1215,7 @@ small,
 .typography-headline, h3,
 .h3 {
   font-size: 1rem;
-  font-weight: normal;
+  font-weight: 500;
   letter-spacing: 0;
   line-height: 1rem; }
 
@@ -2559,13 +2559,11 @@ input[type="submit"].btn-block {
   top: 0; }
 
 .card-title {
-  margin-bottom: 0.3rem;
-  text-shadow: 1px 1px 1px #000000; }
+  margin-bottom: 0.3rem; }
 
 .card-text {
   text-align: right;
-  margin-bottom: 0.3rem;
-  text-shadow: 1px 1px 1px #000000; }
+  margin-bottom: 0.3rem; }
 
 .card {
   background-color: white;
@@ -2818,7 +2816,7 @@ input[type="submit"].btn-block {
 .card-title {
   margin-bottom: 1rem;
   font-size: 1rem;
-  font-weight: normal;
+  font-weight: 500;
   letter-spacing: 0;
   line-height: 1rem; }
   .card-title:last-child {
@@ -2827,6 +2825,18 @@ input[type="submit"].btn-block {
     margin-top: 0.5rem; }
   .card-img-top + .card-block > .card-title:first-child {
     margin-top: 0; }
+
+.card-columns {
+  column-count: 1; }
+  @media (min-width: 600px) {
+    .card-columns {
+      column-count: 2; } }
+  @media (min-width: 960px) {
+    .card-columns {
+      column-count: 3; } }
+  @media (min-width: 1280px) {
+    .card-columns {
+      column-count: 4; } }
 
 .badge,
 .chip {
@@ -8684,3 +8694,14 @@ a.text-inverse:active, a.text-inverse:focus, a.text-inverse:hover {
     mask: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle fill='none' r='0' stroke-width='0' /%3E%3C/svg%3E");
     transform: translateZ(0);
     -webkit-mask-image: -webkit-radial-gradient(circle, #ffffff 100%, #000000 100%); }
+
+.loadmask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 99; }
+  .loadmask p {
+    padding-top: 30%; }
