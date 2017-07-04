@@ -21,6 +21,8 @@ module.exports = new Vuex.Store({
     byArtist: '',
     byName: '',
     byAlbum: '',
+    sort_by: 'name',
+    sort_order: 'az',
     per_page: 24,
     page_idx: 0
   },
@@ -62,6 +64,12 @@ module.exports = new Vuex.Store({
       var byAlbum = context.state.byAlbum;
       if(byAlbum.length){
         query = query.where((t)=> t.album.match(new RegExp(byAlbum,'i')));
+      }
+
+      if(context.state.sort_order == 'za'){
+        query = query.OrderByDescending(function(o){ return o[context.state.sort_by]});
+      }else{
+        query = query.OrderBy(function(o){ return o[context.state.sort_by]});
       }
 
       context.commit('setFiltered', {filtered: query.ToArray()});

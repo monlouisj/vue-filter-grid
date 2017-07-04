@@ -18,6 +18,27 @@
     <label>Search by album</label>
     <input class="form-control" type="text" placeholder="album" v-model="byAlbum"/>
   </div>
+  <div class="row">
+    <div class="col-8">
+      <div class="form-group">
+        <label>Sort By</label>
+        <select class="form-control" v-model="sort_by">
+          <option value="artist">Artist name</option>
+          <option value="name">Track name</option>
+          <option value="album">Album name</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label>Direction</label>
+        <select class="form-control" v-model="sort_order">
+          <option value="az">A - Z</option>
+          <option value="za">Z - A</option>
+        </select>
+      </div>
+    </div>
+  </div>
   <div class="form-group">
     <label>Items per page</label>
     <select class="form-control" v-model="per_page">
@@ -37,6 +58,22 @@ export default {
   name: 'Filters',
   store,
   computed: {
+    sort_by:{
+      get(){
+        return this.$store.state.sort_by
+      },
+      set(v){
+        this.$store.commit('updateFilter',{field:'sort_by', val: v});
+      }
+    },
+    sort_order:{
+      get(){
+        return this.$store.state.sort_order
+      },
+      set(v){
+        this.$store.commit('updateFilter',{field:'sort_order', val: v});
+      }
+    },
     playlists(){ return this.$store.state.playlists },
     playlist_idx:{
       get(){
