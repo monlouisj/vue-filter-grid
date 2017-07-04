@@ -1,14 +1,16 @@
 <template>
 <div class="loadmask" v-if="isLoading">
-  <p>...</p>
+  <p class="text-center">Loading...</p>
 </div>
-<div class="" v-else>
-  <div class="" v-for="trk in tracks">
-    <div class="track">
-      <img :src="trk.img.url" :alt="trk.name">
-      <p class="name">{{trk.name}}</p>
-      <p class="artist">{{trk.artist}}</p>
-      <p class="album">{{trk.album}}</p>
+<div class="row" v-else>
+  <div class="card-columns">
+    <div class="card" v-for="(trk,y) in tracks">
+        <div class="card-block">
+          <h4 class="card-title">{{trk.name|wrap}}</h4>
+          <p class="card-text">{{trk.artist|wrap}}</p>
+          <p class="card-text"><small class="">{{trk.album|wrap}}</small></p>
+        </div>
+        <img v-if="trk.img" class="card-img-bottom img-fluid" :src="trk.img.url" :alt="trk.name">
     </div>
   </div>
 </div>
@@ -22,9 +24,7 @@ export default {
       return this.$store.state.isLoading;
     },
     tracks(){
-      if(typeof this.$store.state.playlists[this.$store.state.playlist_idx] === "undefined") return false;
-      var all_tracks = this.$store.state.playlists[this.$store.state.playlist_idx];
-      return all_tracks.slice(this.$store.state.page_idx, this.$store.state.per_page);
+      return this.$store.state.tracks;
     }
   },
   methods:{}

@@ -11,6 +11,7 @@ livereload = require('gulp-livereload'),
 rename = require('gulp-rename'),
 sass = require('gulp-sass'),
 source = require('vinyl-source-stream'),
+babelify = require("babelify"),
 vueify = require('vueify');
 
 var _stylescss = './front/sass/style.scss';
@@ -18,14 +19,17 @@ var _appjs = './front/js/app.js';
 
 gulp.task('install', function() {
   var libz = [
+    './node_modules/jquery/dist/jquery.min.js',
+    //'./node_modules/daemonite-material/css/material.min.css',
+    './node_modules/daemonite-material/js/material.min.js'
   ];
   gulp.src(libz)
-    .pipe(concat('libz.js'))
-    .pipe(gulp.dest('./public/js'))
+    .pipe(gulp.dest('./public/lib'))
 });
 
 gulp.task('js', function() {
   var bfy = browserify(_appjs)
+  .transform("babelify", {presets: ["es2015"]})
   .transform(vueify)
   .bundle();
 

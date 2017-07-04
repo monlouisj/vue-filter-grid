@@ -1,17 +1,33 @@
 <template>
-<div class="">
-  <label>Playlist</label>
-  <select class="" v-model="playlist_idx">
-    <option v-for="id in playlists_ids" :value="id">{{id}}</option>
-  </select>
-
-  <label>Artist</label>
-  <input type="text" v-model="byArtist"/>
-  <label>Name</label>
-  <input type="text" v-model="byName"/>
-  <label>Album</label>
-  <input type="text" v-model="byAlbum"/>
-  <button type="button" @click="reFetch">Refresh</button>
+<div class="form">
+  <div class="form-group">
+    <label>Playlist</label>
+    <select class="form-control" v-model="playlist_idx">
+      <option v-for="(p,id) in playlists" :value="id">{{p.name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Search by artist</label>
+    <input class="form-control" type="text" placeholder="artist" v-model="byArtist"/>
+  </div>
+  <div class="form-group">
+    <label>Search by name</label>
+    <input class="form-control" type="text" placeholder="name" v-model="byName"/>
+  </div>
+  <div class="form-group">
+    <label>Search by album</label>
+    <input class="form-control" type="text" placeholder="album" v-model="byAlbum"/>
+  </div>
+  <div class="form-group">
+    <label>Items per page</label>
+    <select class="form-control" v-model="per_page">
+      <option value="12">12</option>
+      <option value="24">24</option>
+      <option value="60">60</option>
+    </select>
+  </div>
+  <button type="button" class="btn btn-primary" @click="submit">Search</button>
+  <button type="button" class="btn btn-info" @click="reset">Reset</button>
 </div>
 </template>
 
@@ -21,6 +37,7 @@ export default {
   name: 'Filters',
   store,
   computed: {
+    playlists(){ return this.$store.state.playlists },
     playlist_idx:{
       get(){
         return this.$store.state.playlist_idx;
@@ -29,8 +46,13 @@ export default {
         this.$store.commit('updateFilter',{field:'playlist_idx', val: v})
       }
     },
-    playlists_ids(){
-      return Object.keys(this.$store.state.playlists);
+    per_page: {
+      get:function(){
+        return this.$store.state.per_page;
+      },
+      set:function(v){
+        this.$store.commit('updateFilter',{field:'per_page', val: v})
+      }
     },
     byArtist: {
       get:function(){
@@ -58,8 +80,13 @@ export default {
     }
   },
   methods:{
-    reFetch:function(){
-      this.$store.dispatch('fetchData');
+    submit(){
+      this.$store.dispatch('filterUpdate');
+    },
+    reset(){
+      ['byArtist','byName','byAlbum'].forEach(function(f){
+        this.$store.commit('updateFilter',{field:f, val: ''});
+      }.bind(this));
     }
   }
 }
