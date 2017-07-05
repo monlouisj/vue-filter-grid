@@ -42,14 +42,15 @@ var fetch = function(_offset){
       offset = offset.length == 2 ? offset[1] : null;
     }
 
-    var list = tracks.map(function(t){
+    var list = tracks.map(function(t,idx){
       var artists = t.track.artists.map((a)=>a.name).join(' - ');
       var img = t.track.album.images.length ? t.track.album.images[0]: null;
       return {
            name: t.track.name,
            artist: artists,
            album: t.track.album.name,
-           img: img
+           img: img,
+           idx: 10000*(counter+1)+idx
         };
       }
     );

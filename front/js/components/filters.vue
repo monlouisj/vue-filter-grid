@@ -23,6 +23,7 @@
       <div class="form-group">
         <label>Sort By</label>
         <select class="form-control" v-model="sort_by">
+          <option value="idx">Date added</option>
           <option value="artist">Artist name</option>
           <option value="name">Track name</option>
           <option value="album">Album name</option>

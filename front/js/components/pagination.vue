@@ -17,7 +17,8 @@ export default {
     },
     pages_nums(){
       var arr = [];
-      for (var i = this.$store.state.page_idx; i < this.pages_count; i++) {
+      for (var i = this.$store.state.page_idx-2; i < this.pages_count; i++) {
+        if(i < 0) continue;
         arr.push(i);
         if(arr.length == 5) break;
       }
