@@ -5,6 +5,12 @@
       <li v-for="n in pages_nums" class="page-item" :class="{active: n==page_idx}"><a class="page-link" href="#" @click="goTo(n)">{{n+1}}</a></li>
       <li class="page-item"><a class="page-link" href="#" @click="goToLast">Last</a></li>
     </ul>
+    <p class="text-center">
+      <small>{{filtered}} track{{filtered>1?'s':''}} found / {{albums}} albums</small>
+    </p>
+    <p class="text-center">
+      <small>Total: {{total}} tracks</small>
+    </p>
   </nav>
 </template>
 
@@ -12,6 +18,15 @@
 export default {
   name: "Pagination",
   computed:{
+    albums(){
+      return this.$store.state.playlists[this.$store.state.playlist_idx].albums_count;
+    },
+    total(){
+      return this.$store.state.playlists[this.$store.state.playlist_idx].tracks.length;
+    },
+    filtered(){
+      return this.$store.state.filtered.length;
+    },
     per_page(){
       return this.$store.state.per_page
     },

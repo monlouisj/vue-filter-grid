@@ -1821,6 +1821,9 @@ pre {
   min-width: 14rem;
   opacity: 0; }
 
+.form + nav {
+  margin-top: 30px; }
+
 .form-check {
   display: block;
   margin-bottom: 0.5rem; }
@@ -1986,6 +1989,9 @@ pre {
 
 .media-body {
   flex: 1; }
+
+.nav-item + .nav-item {
+  margin-left: 15px; }
 
 .nav {
   display: flex;
@@ -2833,10 +2839,10 @@ input[type="submit"].btn-block {
       column-count: 2; } }
   @media (min-width: 960px) {
     .card-columns {
-      column-count: 3; } }
+      column-count: 4; } }
   @media (min-width: 1280px) {
     .card-columns {
-      column-count: 4; } }
+      column-count: 8; } }
 
 .badge,
 .chip {

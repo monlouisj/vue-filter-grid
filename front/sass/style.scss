@@ -23,10 +23,16 @@ $line-height-headline: $font-size-headline;
   @import "./node_modules/daemonite-material/assets/sass/bootstrap/close";
   @import "./node_modules/daemonite-material/assets/sass/bootstrap/code";
   @import "./node_modules/daemonite-material/assets/sass/bootstrap/custom-form";
+  .form+nav{
+    margin-top: 30px;
+  }
   @import "./node_modules/daemonite-material/assets/sass/bootstrap/form";
   @import "./node_modules/daemonite-material/assets/sass/bootstrap/image";
   @import "./node_modules/daemonite-material/assets/sass/bootstrap/jumbotron";
   @import "./node_modules/daemonite-material/assets/sass/bootstrap/media";
+  .nav-item + .nav-item{
+    margin-left: 15px;
+  }
   @import "./node_modules/daemonite-material/assets/sass/bootstrap/nav";
   @import "./node_modules/daemonite-material/assets/sass/bootstrap/pagination";
   @import "./node_modules/daemonite-material/assets/sass/bootstrap/popover";
@@ -61,10 +67,10 @@ $line-height-headline: $font-size-headline;
       column-count: 2;
     }
     @include media-breakpoint-up(md) {
-      column-count: 3;
+      column-count: 4;
     }
     @include media-breakpoint-up(lg) {
-      column-count: 4;
+      column-count: 8;
     }
   }
   @import "./node_modules/daemonite-material/assets/sass/material/chip";

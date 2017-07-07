@@ -1,6 +1,7 @@
 var playlistModel = function(override){
   var props = {
     name:"",
+    albums_count: 0,
     tracks: []
   };
 

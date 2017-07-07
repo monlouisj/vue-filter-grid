@@ -24,4 +24,6 @@ Demo link: http://demo.macaraibe.com/
 
   2. gulp install
 
-  3. node serve.js
+  3. write a config.js file from config.dist
+
+  4. node serve.js

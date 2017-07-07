@@ -72,6 +72,10 @@ module.exports = new Vuex.Store({
         query = query.OrderBy(function(o){ return o[context.state.sort_by]});
       }
 
+      var album_count = query.Distinct(function(o){return o.album;}).Count();
+
+      context.commit('setAlbumCount', {n: album_count});
+
       context.commit('setFiltered', {filtered: query.ToArray()});
 
       query = query.skip(context.state.page_idx*context.state.per_page).take(context.state.per_page);
@@ -79,6 +83,10 @@ module.exports = new Vuex.Store({
     }
   },
   mutations:{
+    //number of distinct albums
+    setAlbumCount(state, arg){
+      state.playlists[state.playlist_idx].albums_count = arg.n;
+    },
     //tracks on screen, after we have applied filters but no pagination
     setFiltered(state, arg){
       state.filtered = arg.filtered;

@@ -4,6 +4,7 @@
 var playlistModel = function playlistModel(override) {
   var props = {
     name: "",
+    albums_count: 0,
     tracks: []
   };
 
@@ -160,9 +161,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-63a99142", __vue__options__)
+    hotAPI.createRecord("data-v-4ff4980c", __vue__options__)
   } else {
-    hotAPI.reload("data-v-63a99142", __vue__options__)
+    hotAPI.rerender("data-v-4ff4980c", __vue__options__)
   }
 })()}
 },{"../store.js":6,"vue":42,"vue-hot-reload-api":40}],4:[function(require,module,exports){
@@ -195,9 +196,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f9974fdc", __vue__options__)
+    hotAPI.createRecord("data-v-c534cd52", __vue__options__)
   } else {
-    hotAPI.reload("data-v-f9974fdc", __vue__options__)
+    hotAPI.rerender("data-v-c534cd52", __vue__options__)
   }
 })()}
 },{"vue":42,"vue-hot-reload-api":40}],5:[function(require,module,exports){
@@ -210,6 +211,15 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   name: "Pagination",
   computed: {
+    albums: function albums() {
+      return this.$store.state.playlists[this.$store.state.playlist_idx].albums_count;
+    },
+    total: function total() {
+      return this.$store.state.playlists[this.$store.state.playlist_idx].tracks.length;
+    },
+    filtered: function filtered() {
+      return this.$store.state.filtered.length;
+    },
     per_page: function per_page() {
       return this.$store.state.per_page;
     },
@@ -249,16 +259,16 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{attrs:{"aria-label":"Grid navigation"}},[_c('ul',{staticClass:"pagination justify-content-center"},[_c('li',{staticClass:"page-item"},[_c('a',{staticClass:"page-link",attrs:{"href":"#"},on:{"click":_vm.goTo1st}},[_vm._v("First")])]),_vm._v(" "),_vm._l((_vm.pages_nums),function(n){return _c('li',{staticClass:"page-item",class:{active: n==_vm.page_idx}},[_c('a',{staticClass:"page-link",attrs:{"href":"#"},on:{"click":function($event){_vm.goTo(n)}}},[_vm._v(_vm._s(n+1))])])}),_vm._v(" "),_c('li',{staticClass:"page-item"},[_c('a',{staticClass:"page-link",attrs:{"href":"#"},on:{"click":_vm.goToLast}},[_vm._v("Last")])])],2)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{attrs:{"aria-label":"Grid navigation"}},[_c('ul',{staticClass:"pagination justify-content-center"},[_c('li',{staticClass:"page-item"},[_c('a',{staticClass:"page-link",attrs:{"href":"#"},on:{"click":_vm.goTo1st}},[_vm._v("First")])]),_vm._v(" "),_vm._l((_vm.pages_nums),function(n){return _c('li',{staticClass:"page-item",class:{active: n==_vm.page_idx}},[_c('a',{staticClass:"page-link",attrs:{"href":"#"},on:{"click":function($event){_vm.goTo(n)}}},[_vm._v(_vm._s(n+1))])])}),_vm._v(" "),_c('li',{staticClass:"page-item"},[_c('a',{staticClass:"page-link",attrs:{"href":"#"},on:{"click":_vm.goToLast}},[_vm._v("Last")])])],2),_vm._v(" "),_c('p',{staticClass:"text-center"},[_c('small',[_vm._v(_vm._s(_vm.filtered)+" track"+_vm._s(_vm.filtered>1?'s':'')+" found / "+_vm._s(_vm.albums)+" albums")])]),_vm._v(" "),_c('p',{staticClass:"text-center"},[_c('small',[_vm._v("Total: "+_vm._s(_vm.total)+" tracks")])])])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-33f50366", __vue__options__)
+    hotAPI.createRecord("data-v-4701062a", __vue__options__)
   } else {
-    hotAPI.reload("data-v-33f50366", __vue__options__)
+    hotAPI.rerender("data-v-4701062a", __vue__options__)
   }
 })()}
 },{"vue":42,"vue-hot-reload-api":40}],6:[function(require,module,exports){
@@ -350,6 +360,12 @@ module.exports = new Vuex.Store({
         });
       }
 
+      var album_count = query.Distinct(function (o) {
+        return o.album;
+      }).Count();
+
+      context.commit('setAlbumCount', { n: album_count });
+
       context.commit('setFiltered', { filtered: query.ToArray() });
 
       query = query.skip(context.state.page_idx * context.state.per_page).take(context.state.per_page);
@@ -357,6 +373,11 @@ module.exports = new Vuex.Store({
     }
   },
   mutations: {
+    //number of distinct albums
+    setAlbumCount: function setAlbumCount(state, arg) {
+      state.playlists[state.playlist_idx].albums_count = arg.n;
+    },
+
     //tracks on screen, after we have applied filters but no pagination
     setFiltered: function setFiltered(state, arg) {
       state.filtered = arg.filtered;
@@ -1874,13 +1895,14 @@ proto.emitEvent = function( eventName, args ) {
   if ( !listeners || !listeners.length ) {
     return;
   }
-  var i = 0;
-  var listener = listeners[i];
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice(0);
   args = args || [];
   // once stuff
   var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
 
-  while ( listener ) {
+  for ( var i=0; i < listeners.length; i++ ) {
+    var listener = listeners[i]
     var isOnce = onceListeners && onceListeners[ listener ];
     if ( isOnce ) {
       // remove listener
@@ -1891,16 +1913,12 @@ proto.emitEvent = function( eventName, args ) {
     }
     // trigger listener
     listener.apply( this, args );
-    // get next listener
-    i += isOnce ? 0 : 1;
-    listener = listeners[i];
   }
 
   return this;
 };
 
-proto.allOff =
-proto.removeAllListeners = function() {
+proto.allOff = function() {
   delete this._events;
   delete this._onceEvents;
 };
