@@ -2,7 +2,7 @@
 <div class="loadmask" v-if="isLoading">
   <p class="text-center">Loading...</p>
 </div>
-<div class="row" v-else>
+<div class="all-col" v-else>
   <div class="card-columns">
     <div class="card" v-for="(trk,y) in tracks">
         <div class="card-block">

@@ -161,9 +161,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4ff4980c", __vue__options__)
+    hotAPI.createRecord("data-v-63a99142", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-4ff4980c", __vue__options__)
+    hotAPI.reload("data-v-63a99142", __vue__options__)
   }
 })()}
 },{"../store.js":6,"vue":42,"vue-hot-reload-api":40}],4:[function(require,module,exports){
@@ -189,16 +189,16 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isLoading)?_c('div',{staticClass:"loadmask"},[_c('p',{staticClass:"text-center"},[_vm._v("Loading...")])]):_c('div',{staticClass:"row"},[_c('div',{staticClass:"card-columns"},_vm._l((_vm.tracks),function(trk,y){return _c('div',{staticClass:"card"},[_c('div',{staticClass:"card-block"},[_c('h4',{staticClass:"card-title"},[_vm._v(_vm._s(_vm._f("wrap")(trk.name)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_vm._v(_vm._s(_vm._f("wrap")(trk.artist)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_c('small',{},[_vm._v(_vm._s(_vm._f("wrap")(trk.album)))])])]),_vm._v(" "),(trk.img)?_c('img',{staticClass:"card-img-bottom img-fluid",attrs:{"src":trk.img.url,"alt":trk.name}}):_vm._e()])}))])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isLoading)?_c('div',{staticClass:"loadmask"},[_c('p',{staticClass:"text-center"},[_vm._v("Loading...")])]):_c('div',{staticClass:"all-col"},[_c('div',{staticClass:"card-columns"},_vm._l((_vm.tracks),function(trk,y){return _c('div',{staticClass:"card"},[_c('div',{staticClass:"card-block"},[_c('h4',{staticClass:"card-title"},[_vm._v(_vm._s(_vm._f("wrap")(trk.name)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_vm._v(_vm._s(_vm._f("wrap")(trk.artist)))]),_vm._v(" "),_c('p',{staticClass:"card-text"},[_c('small',{},[_vm._v(_vm._s(_vm._f("wrap")(trk.album)))])])]),_vm._v(" "),(trk.img)?_c('img',{staticClass:"card-img-bottom img-fluid",attrs:{"src":trk.img.url,"alt":trk.name}}):_vm._e()])}))])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c534cd52", __vue__options__)
+    hotAPI.createRecord("data-v-f9974fdc", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-c534cd52", __vue__options__)
+    hotAPI.reload("data-v-f9974fdc", __vue__options__)
   }
 })()}
 },{"vue":42,"vue-hot-reload-api":40}],5:[function(require,module,exports){
@@ -266,9 +266,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4701062a", __vue__options__)
+    hotAPI.createRecord("data-v-33f50366", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-4701062a", __vue__options__)
+    hotAPI.reload("data-v-33f50366", __vue__options__)
   }
 })()}
 },{"vue":42,"vue-hot-reload-api":40}],6:[function(require,module,exports){
@@ -1895,14 +1895,13 @@ proto.emitEvent = function( eventName, args ) {
   if ( !listeners || !listeners.length ) {
     return;
   }
-  // copy over to avoid interference if .off() in listener
-  listeners = listeners.slice(0);
+  var i = 0;
+  var listener = listeners[i];
   args = args || [];
   // once stuff
   var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
 
-  for ( var i=0; i < listeners.length; i++ ) {
-    var listener = listeners[i]
+  while ( listener ) {
     var isOnce = onceListeners && onceListeners[ listener ];
     if ( isOnce ) {
       // remove listener
@@ -1913,12 +1912,16 @@ proto.emitEvent = function( eventName, args ) {
     }
     // trigger listener
     listener.apply( this, args );
+    // get next listener
+    i += isOnce ? 0 : 1;
+    listener = listeners[i];
   }
 
   return this;
 };
 
-proto.allOff = function() {
+proto.allOff =
+proto.removeAllListeners = function() {
   delete this._events;
   delete this._onceEvents;
 };
