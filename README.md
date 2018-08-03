@@ -2,7 +2,7 @@
 
 The purpose of this example is to show how we can fetch some data in JSON format, then process it entirely in Javascript. The results are processed using a *LINQ* library, the app state is managed via *Vuex*, and the rendering is powered by *Vue*.
 
-Demo link: http://demo.macaraibe.com/
+Demo link: http://demo.communautecreative.fr/
 
 # Dummy data
 
